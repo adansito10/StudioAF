@@ -28,7 +28,7 @@ export class Tab1Page {
 
   games = [
     {
-      title: 'Game 1',
+      title: 'Bodas',
       cover: 'https://images.unsplash.com/photo-1564754943164-e83c08469116?w=1000&auto=format&fit=crop&q=60',
       gallery: [
         'https://via.placeholder.com/600x400?text=Game1-1',
