@@ -1,17 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+<ion-header>
+  <ion-toolbar style="background-color: black !important;">
+    <ion-title class="text-center text-white">Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+<ion-content class="ion-padding profile-container">
+  <div class="profile-header position-relative">
+    <img src="https://scontent.fjal3-1.fna.fbcdn.net/v/t39.30808-6/395206629_175272952307024_7939352240849571079_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Nlm7ehFqrccQ7kNvgG-2VZl&_nc_oc=Adg02GJ2N2_UhkyCEOsxfoZUfXLJkIrJJ9tK-5Q8MJ6onoFEujsfxsfbMXjI8Y1sWyGpzNhoqJfznRhQOXQwFIYk&_nc_zt=23&_nc_ht=scontent.fjal3-1.fna&_nc_gid=AJb9uR5RCUpSddiiktCtHRz&oh=00_AYAiACcQUmNYxTK3Xkd-KHrJWHrxdc-1vopHsxJHziKoSw&oe=67B818EB" class="profile-img" alt="Foto de perfil">
+    <button class="btn camera-btn">
+      <ion-icon name="camera-outline"></ion-icon>
+    </button>
+  </div>
+
+  <div class="profile-info text-center">
+    <h3 class="fw-bold text-white">Katy White</h3>
+    <p class="text-muted">Usuario</p>
+    <p class="text-muted">
+      <ion-icon name="mail-outline"></ion-icon> correo
+    </p>
+    <p class="text-muted">
+      <ion-icon name="call-outline"></ion-icon> +1 234 567 890
+    </p>
+
+    <!-- Botones de acción -->
+    
+
+    <!-- Botón Editar -->
+    <button class="btn btn-primary w-100 mt-4 shadow">Editar</button>
+  </div>
 </ion-content>

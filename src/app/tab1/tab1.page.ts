@@ -10,9 +10,9 @@ import { NavController } from '@ionic/angular';
 export class Tab1Page {
   slides = [
     {
-      title: 'STUDIO AF',
+      title: '',
       description: '',
-      image: 'https://images.unsplash.com/photo-1564754943164-e83c08469116?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D'
+      image: 'https://scontent.fjal3-1.fna.fbcdn.net/v/t39.30808-6/424560512_233545886479730_1644625059791767260_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Vk7AfGBTWh8Q7kNvgGhmha7&_nc_oc=AdgLOXB3clJcW9Xvxx1FOyGJ_P7atwfCZEmbSkE7G9xReKJZwt1tUldsfI8esWKl3e3EerdwcLn6r8y11m-b5gSp&_nc_zt=23&_nc_ht=scontent.fjal3-1.fna&_nc_gid=A4m-5_BvCI3VdChPuXaaVc9&oh=00_AYDIc-UmETLTxacolSNy7wWwxGsFGJPDfGqxC_cvCx-79A&oe=67B80AC3'
     },
     {
       title: 'Second Slide',
