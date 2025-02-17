@@ -1,13 +1,47 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>detalle-servicio</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ servicio.nombre }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalle-servicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card">
+    <!-- Carrusel de Bootstrap -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+      <div class="carousel-inner">
+        <!-- Imagen del servicio -->
+        <div class="carousel-item active">
+          <img [src]="servicio.imagen" class="d-block w-100 img-fluid" alt="Imagen">
+        </div>
+        
+        <!-- Video del servicio, que se muestra después de 4 segundos -->
+        <div class="carousel-item">
+          <div *ngIf="servicio.video">
+            <video width="100%" controls>
+              <source [src]="servicio.video" type="video/mp4">
+              Tu navegador no soporta el formato de video.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del servicio -->
+    <div class="card-body">
+      <h2 class="card-title">{{ servicio.nombre }}</h2>
+      <h5 class="card-subtitle">{{ servicio.descripcion }}</h5>
+
+      <h4 class="section-title">Precio: ${{ servicio.precio }}</h4>
+
+      <h4 class="section-title">Incluye:</h4>
+      <ul>
+        <li *ngFor="let item of servicio.contenido">{{ item }}</li>
+      </ul>
+
+      <button class="btn-contratar">CONTRATAR</button>
+    </div>
+  </div>
 </ion-content>

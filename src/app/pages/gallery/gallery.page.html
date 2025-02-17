@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/tabs/tab1" >
+      <ion-button routerLink="/tabs/tab1">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6" size-md="4" *ngFor="let img of images">
-        <ion-card (click)="openImage(img)">
-          <ion-img [src]="img"></ion-img>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3" *ngFor="let img of images">
+        <div class="card">
+          <img [src]="img" class="card-img-top img-fluid rounded-3" (click)="openImage(img)" alt="Imagen de galería">
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
