@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: PagesPage
+  },  {
+    path: 'servicio-domicilio',
+    loadChildren: () => import('./servicio-domicilio/servicio-domicilio.module').then( m => m.ServicioDomicilioPageModule)
   }
+
 ];
 
 @NgModule({

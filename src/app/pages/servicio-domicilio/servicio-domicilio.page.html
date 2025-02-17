@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/tab1">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm bg-dark text-white">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">Formulario de contacto</h4>
+
+            <form>
+              <!-- Dirección -->
+              <div class="mb-3">
+                <label for="address" class="form-label">Dirección</label>
+                <input type="text" class="form-control bg-dark text-white border-light" id="address" placeholder="Ingresa tu dirección" required>
+              </div>
+
+              <!-- Código Postal -->
+              <div class="mb-3">
+                <label for="postalCode" class="form-label">Código Postal</label>
+                <input type="text" class="form-control bg-dark text-white border-light" id="postalCode" placeholder="Ingresa tu código postal" required>
+              </div>
+
+              <!-- Estado -->
+              <div class="mb-3">
+                <label for="state" class="form-label">Estado</label>
+                <select class="form-control bg-dark text-white border-light" id="state" required>
+                  <option value="" disabled selected>Selecciona un estado</option>
+                  <option value="Aguascalientes">Aguascalientes</option>
+                  <option value="Baja California">Baja California</option>
+                  <option value="Baja California Sur">Baja California Sur</option>
+                  <option value="Campeche">Campeche</option>
+                  <option value="Chiapas">Chiapas</option>
+                  <option value="Chihuahua">Chihuahua</option>
+                  <option value="Coahuila">Coahuila</option>
+                  <option value="Colima">Colima</option>
+                  <option value="Durango">Durango</option>
+                  <option value="Guanajuato">Guanajuato</option>
+                  <option value="Guerrero">Guerrero</option>
+                  <option value="Hidalgo">Hidalgo</option>
+                  <option value="Jalisco">Jalisco</option>
+                  <option value="Estado de México">Estado de México</option>
+                  <option value="Michoacán">Michoacán</option>
+                  <option value="Morelos">Morelos</option>
+                  <option value="Nayarit">Nayarit</option>
+                  <option value="Nuevo León">Nuevo León</option>
+                  <option value="Oaxaca">Oaxaca</option>
+                  <option value="Puebla">Puebla</option>
+                  <option value="Querétaro">Querétaro</option>
+                  <option value="Quintana Roo">Quintana Roo</option>
+                  <option value="San Luis Potosí">San Luis Potosí</option>
+                  <option value="Sinaloa">Sinaloa</option>
+                  <option value="Sonora">Sonora</option>
+                  <option value="Tabasco">Tabasco</option>
+                  <option value="Tamaulipas">Tamaulipas</option>
+                  <option value="Tlaxcala">Tlaxcala</option>
+                  <option value="Veracruz">Veracruz</option>
+                  <option value="Yucatán">Yucatán</option>
+                  <option value="Zacatecas">Zacatecas</option>
+                </select>
+              </div>
+
+              <!-- Municipio -->
+              <div class="mb-3">
+                <label for="municipality" class="form-label">Municipio</label>
+                <input type="text" class="form-control bg-dark text-white border-light" id="municipality" placeholder="Ingresa tu municipio" required>
+              </div>
+
+              <!-- Localidad -->
+              <div class="mb-3">
+                <label for="locality" class="form-label">Localidad</label>
+                <input type="text" class="form-control bg-dark text-white border-light" id="locality" placeholder="Ingresa tu localidad" required>
+              </div>
+
+              <!-- Colonia -->
+              <div class="mb-3">
+                <label for="colony" class="form-label">Colonia</label>
+                <input type="text" class="form-control bg-dark text-white border-light" id="colony" placeholder="Ingresa tu colonia" required>
+              </div>
+
+              <!-- Indicaciones -->
+              <div class="mb-3">
+                <label for="instructions" class="form-label">Indicaciones</label>
+                <textarea class="form-control bg-dark text-white border-light" id="instructions" placeholder="Indica cómo llegar a la casa o salón" rows="4" required></textarea>
+              </div>
+
+              <!-- Datos de contacto -->
+              <div class="mb-3">
+                <label for="contactInfo" class="form-label">Datos de Contacto</label>
+                <p class="text-light">Te llamaremos por si hay un problema para localizarte.</p>
+              </div>
+
+              <!-- Nombre a cargo -->
+              <div class="mb-3">
+                <label for="ownerName" class="form-label">Nombre de quien está a cargo</label>
+                <input type="text" class="form-control bg-dark text-white border-light" id="ownerName" placeholder="Nombre completo" required>
+              </div>
+
+              <!-- Teléfono -->
+              <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control bg-dark text-white border-light" id="phone" placeholder="Número de teléfono" required>
+              </div>
+
+              <!-- Botón de envío -->
+              <button type="submit" class="btn btn-primary w-100">confirmar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

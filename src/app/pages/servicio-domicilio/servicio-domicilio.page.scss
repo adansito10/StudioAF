@@ -1,0 +1,83 @@
+// Fondo negro con patrón de cuadros grises
+ion-content {
+    --background: #050505;
+    background: linear-gradient(45deg, #1c1c1c 25%, #191919 25%, #191919 50%, #1c1c1c 50%, #1c1c1c 75%, #191919 75%, #191919 100%);
+    background-size: 40px 40px;
+    padding-bottom: 20px;
+  }
+  
+  // Contenedor del formulario
+  .container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05); // Transparente con leve contraste
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+  }
+  
+  // Estilos para etiquetas y textos
+  .form-label {
+    font-weight: bold;
+    color: #b3b3b3; // Gris claro
+  }
+  
+  // Estilos para inputs y select
+  input, select, textarea {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  // Checkboxes con estilos elegantes
+  .form-check-label {
+    color: #b3b3b3;
+  }
+  
+  .form-check-input {
+    background-color: transparent;
+    border: 1px solid white;
+  }
+  
+  // Botón "Usar mi ubicación"
+  .btn-ubicacion {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #b3b3b3;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  
+  .btn-ubicacion:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  // Botón "Continuar"
+  .btn-continuar {
+    font-size: 1.1rem;
+    padding: 10px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .btn-continuar:hover {
+    background: linear-gradient(45deg, #0056b3, #003d80);
+  }
+  
+  // Barra superior con estilo oscuro
+  ion-toolbar {
+    --background: #000;
+    --color: white;
+    border-bottom: 2px solid #000000;
+  }
+  
