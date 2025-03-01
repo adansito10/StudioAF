@@ -1,0 +1,115 @@
+/* Estilo general para la página */
+ion-content {
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: #fff; /* Color de texto blanco */
+  padding: 20px;
+}
+
+/* Estilo para las tarjetas */
+.card-style {
+  background-color: #2a2a2a; /* Fondo oscuro para las tarjetas */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra sutil para dar profundidad */
+  margin-bottom: 20px; /* Separación entre tarjetas */
+}
+
+/* Título de las tarjetas */
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffcc00; /* Color amarillo para resaltar el título */
+}
+
+/* Botones de métodos de pago */
+.payment-btn {
+  background-color: #ffcc00; /* Fondo amarillo para los botones */
+  color: #1a1a1a; /* Texto oscuro */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  padding: 15px 20px;
+}
+
+.payment-btn:hover {
+  background-color: #e6b800; /* Efecto hover para resaltar el botón */
+  transform: scale(1.05); /* Efecto de aumento cuando se pasa el cursor */
+}
+
+/* Iconos en los botones */
+ion-icon {
+  font-size: 33px;
+  margin-right: 10px;
+  color: #ffffff; /* Color del icono oscuro */
+}
+
+/* Estilo del formulario */
+ion-item {
+  margin-bottom: 15px;
+}
+
+ion-label {
+  color: #ffcc00; /* Etiquetas en color amarillo */
+}
+
+ion-input {
+  --border-color: #ffcc00; /* Color de borde para inputs */
+  --placeholder-color: #fff; /* Color de placeholder blanco */
+}
+
+/* Estilo para el botón de confirmar pago */
+ion-button[type="submit"] {
+  background-color: #ffcc00; /* Fondo amarillo */
+  color: #1a1a1a; /* Texto oscuro */
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+ion-button[type="submit"]:disabled {
+  background-color: #666666; /* Fondo gris cuando está deshabilitado */
+}
+
+/* Botón para generar PDF */
+ion-button {
+  color: #1a1a1a; /* Texto oscuro */
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+
+
+ion-button ion-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+/* Estilo de los elementos al seleccionar un método de pago */
+ion-card-header {
+  background-color: #333333; /* Fondo más oscuro para los headers */
+  color: #fff; /* Texto blanco */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Estilo general para los inputs y labels */
+ion-input {
+  --background: #333333; /* Fondo oscuro para inputs */
+  --border-radius: 8px; /* Bordes redondeados */
+}
+
+ion-item ion-label {
+  font-size: 14px;
+}
+
+/* Títulos del formulario de pago */
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffcc00; /* Color de título */
+}
+

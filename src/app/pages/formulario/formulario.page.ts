@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.page.html',
@@ -7,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   standalone:false 
 })
 export class FormularioPage implements OnInit {
+  constructor(private navCtrl: NavController) { }
+  ngOnInit(): void {
+  }
 
-  constructor() { }
-
-  ngOnInit() {
+  editarDomicilio() {
+    // Aquí puedes implementar la lógica para editar el domicilio
+    this.navCtrl.navigateForward('/editar-domicilio');
   }
 
 }

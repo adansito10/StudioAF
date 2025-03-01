@@ -10,7 +10,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, ImageModalComponent],
+  declarations: [AppComponent, MenuComponent, ImageModalComponent, ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

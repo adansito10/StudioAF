@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-detalle-servicio',
   templateUrl: './detalle-servicio.page.html',
   styleUrls: ['./detalle-servicio.page.scss'],
-  standalone:false
+  standalone: false
 })
 export class DetalleServicioPage implements OnInit {
   servicio: any = {
@@ -16,6 +16,10 @@ export class DetalleServicioPage implements OnInit {
     contenido: [],
     video: ''
   };
+
+  incluirVideo: boolean = false;
+  precioTotal: number = 0;
+  costoVideo: number = 500; // Precio adicional por el video
 
   constructor(private route: ActivatedRoute) {}
 
@@ -44,7 +48,7 @@ export class DetalleServicioPage implements OnInit {
             '40 fotos editadas',
             '1 video resumen'
           ];
-          this.servicio.video = 'assets/videos/paquete-xv.mp4';  // Video del paquete
+          this.servicio.video = 'assets/videos/paquete-xv.mp4';
           break;
 
         case 'Paquete Infantil':
@@ -54,7 +58,7 @@ export class DetalleServicioPage implements OnInit {
             '30 fotos de alta calidad',
             'Mini álbum impreso'
           ];
-          this.servicio.video = 'assets/videos/paquete-infantil.mp4';  // Video del paquete
+          this.servicio.video = 'assets/videos/paquete-infantil.mp4';
           break;
 
         default:
@@ -62,6 +66,13 @@ export class DetalleServicioPage implements OnInit {
           this.servicio.contenido = ['Información no disponible'];
           this.servicio.video = '';
       }
+
+      // Inicializar precio
+      this.precioTotal = this.servicio.precio;
     });
+  }
+
+  actualizarPrecio() {
+    this.precioTotal = this.servicio.precio + (this.incluirVideo ? this.costoVideo : 0);
   }
 }

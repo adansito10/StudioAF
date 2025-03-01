@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'servicio-domicilio',
     loadChildren: () => import('./servicio-domicilio/servicio-domicilio.module').then( m => m.ServicioDomicilioPageModule)
+  },
+  {
+    path: 'metodo-pago',
+    loadChildren: () => import('./metodo-pago/metodo-pago.module').then( m => m.MetodoPagoPageModule)
   }
 
 ];

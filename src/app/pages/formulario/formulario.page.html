@@ -1,13 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>formulario</ion-title>
+<ion-header>
+  <ion-toolbar class="bg-dark">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/tab2">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-light"></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">formulario</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content style="--ion-background-color: #000000; color: #ffffff;">
+  <ion-text>
+    <h1 class="bienvenida">Elije la forma de entrega</h1>
+  </ion-text>
+
+  <ion-card button style="--background: #333333;" routerLink="/metodo-pago">
+    <ion-card-content>
+      <h2 style="color: #ffffff;">Enviar a domicilio</h2>
+      <p style="color: #ffffff;">Avenida Morelos SN - 7 A - Peñuela Residencial</p>
+      <p style="color: #ffffff;"><strong>Gratis</strong></p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="primary" routerLink="/servicio-domicilio">
+    <p class="text-right">Editar o elegir otro domicilio</p>
+  </ion-text>
 </ion-content>

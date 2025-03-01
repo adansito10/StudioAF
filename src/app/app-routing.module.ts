@@ -34,6 +34,18 @@ const routes: Routes = [
     path: 'servicio-domicilio',
     loadChildren: () => import('./pages/servicio-domicilio/servicio-domicilio.module').then( m => m.ServicioDomicilioPageModule)
   },
+{
+  path: 'metodo-pago',
+  loadChildren: () => import('./pages/metodo-pago/metodo-pago.module').then( m => m.MetodoPagoPageModule)
+},
+  {
+    path: 'pago-confirmado',
+    loadChildren: () => import('./pago-confirmado/pago-confirmado.module').then( m => m.PagoConfirmadoPageModule)
+  },
+  {
+    path: 'consultas',
+    loadChildren: () => import('./consultas/consultas.module').then( m => m.ConsultasPageModule)
+  }
   
  
   
