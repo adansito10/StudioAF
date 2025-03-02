@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/tab2">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Opciones Extras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-dark text-white">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm bg-dark text-white border-light">
+          <div class="card-body">
+            <form (ngSubmit)="enviarFormulario()">
+              <div class="mb-3">
+                <label class="form-label">Horas Extras:</label>
+                <input type="number" [(ngModel)]="formulario.horasExtras" name="horasExtras" class="form-control" min="0">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Camarógrafo Extra:</label>
+                <input type="checkbox" [(ngModel)]="formulario.camarografoExtra" name="camarografoExtra" class="form-check-input">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Set de Fotos Rotativo:</label>
+                <input type="checkbox" [(ngModel)]="formulario.setGrabacion" name="setGrabacion" class="form-check-input">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Agregar Video del Evento:</label>
+                <input type="checkbox" [(ngModel)]="formulario.videoEvento" name="videoEvento" class="form-check-input">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Fecha:</label>
+                <input type="date" [(ngModel)]="formulario.fecha" name="fecha" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Hora:</label>
+                <input type="time" [(ngModel)]="formulario.hora" name="hora" class="form-control" step="1800">
+              </div>
+
+              <button type="submit" class="btn btn-light w-100">Confirmar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

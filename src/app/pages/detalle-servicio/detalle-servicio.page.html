@@ -46,7 +46,21 @@
         <li *ngFor="let item of servicio.contenido">{{ item }}</li>
         <li *ngIf="incluirVideo">🎥 Video resumen</li>
       </ul>
+
+
+      <h4>Extras seleccionados:</h4>
+      <ul>
+        <li *ngIf="detallesExtras.horasExtras > 0">⏳ {{ detallesExtras.horasExtras }} horas extras</li>
+        <li *ngIf="detallesExtras.camarografoExtra">📸 Camarógrafo extra</li>
+        <li *ngIf="detallesExtras.setGrabacion">🎬 Set de grabación</li>
+        <li *ngIf="detallesExtras.videoEvento">🎥 Video del evento</li>
+        <li><strong>Fecha:</strong> {{ detallesExtras.fecha }}</li>
+        <li><strong>Hora:</strong> {{ detallesExtras.hora }}</li>
+      </ul>
     </div>
+
+
+    
 
     <!-- Precio en la parte superior derecha -->
     <div class="price-container">
@@ -54,6 +68,21 @@
     </div>
 
     <!-- Botón en la parte inferior -->
-    <button routerLink="/formulario" class="btn-contratar">CONTRATAR</button>
+    <button [routerLink]="['/nueva-pagina']" 
+    [queryParams]="{
+      nombre: servicio.nombre,
+      descripcion: servicio.descripcion,
+      imagen: servicio.imagen,
+      video: servicio.video,
+      horasExtras: detallesExtras.horasExtras,
+      camarografoExtra: detallesExtras.camarografoExtra,
+      setGrabacion: detallesExtras.setGrabacion,
+      videoEvento: detallesExtras.videoEvento,
+      fecha: detallesExtras.fecha,
+      hora: detallesExtras.hora
+    }"
+    class="btn-contratar">
+MODIFICAR
+</button>    <button routerLink="/formulario" class="btn-contratar">CONTRATAR</button>
   </div>
 </ion-content>

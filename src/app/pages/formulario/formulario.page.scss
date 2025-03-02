@@ -11,10 +11,10 @@
 .text-right {
   position: absolute;  /* Esto permite mover el elemento libremente */
   right: 20px;         /* Se ajusta a 10px del borde derecho de su contenedor */
-  top: 19%;            /* Centra verticalmente */
+  top: 22%;            /* Centra verticalmente */
   transform: translateY(-50%); /* Ajuste para centrar mejor */
   cursor: pointer;
-  color: #4caf50;
+  color: #00ff08;
   text-decoration: underline;
 }
 
