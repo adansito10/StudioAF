@@ -11,15 +11,15 @@
 
 <ion-content style="--ion-background-color: #000000; color: #ffffff;">
   <ion-text>
-    <h1 class="bienvenida">Elije la forma de entrega</h1>
+    <h1 class="bienvenida">Elije tu domicilio</h1>
   </ion-text>
 
   <ion-card button style="--background: #333333;" routerLink="/metodo-pago">
     <ion-item lines="none" style="--background: #333333;">
       <ion-label>
-        <h2 class="text-light">Enviar a domicilio</h2>
-        <p class="text-light">Avenida Morelos SN - 7 A - Peñuela Residencial</p>
-        <p class="text-light"><strong>Gratis</strong></p>
+        <h2 class="text-light">Ir a mi domicilio</h2>
+        <p class="text-light">{{ domicilio.direccion }}</p>
+        <p class="text-light"><strong>$300</strong></p>
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="icono-blanco"></ion-icon>
     </ion-item>

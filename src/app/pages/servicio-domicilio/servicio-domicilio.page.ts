@@ -23,7 +23,6 @@ export class ServicioDomicilioPage implements OnInit {
 
   ngOnInit(): void {}
 
-  // 🛰️ Obtener ubicación automáticamente
   usarUbicacion() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -31,7 +30,6 @@ export class ServicioDomicilioPage implements OnInit {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
 
-          // Convertir coordenadas a dirección con OpenStreetMap (API gratuita)
           const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
 
           try {
@@ -43,6 +41,9 @@ export class ServicioDomicilioPage implements OnInit {
             this.formulario.estado = data.address.state || '';
             this.formulario.municipio = data.address.city || data.address.town || data.address.village || '';
             this.ubicacionConfirmada = true;
+
+            // Guardar la dirección en localStorage
+            this.guardarDomicilio(this.formulario);
           } catch (error) {
             console.error('Error obteniendo la dirección:', error);
             alert('No se pudo obtener la dirección.');
@@ -56,6 +57,11 @@ export class ServicioDomicilioPage implements OnInit {
     } else {
       alert('Tu dispositivo no soporta geolocalización.');
     }
+  }
+
+  // Función para guardar el domicilio en localStorage
+  guardarDomicilio(domicilio: any) {
+    localStorage.setItem('domicilio', JSON.stringify(domicilio));
   }
 
   enviarFormulario() {

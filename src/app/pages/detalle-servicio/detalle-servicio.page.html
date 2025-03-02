@@ -35,11 +35,7 @@
       <h2 class="card-title">{{ servicio.nombre }}</h2>
       <h5 class="card-subtitle">{{ servicio.descripcion }}</h5>
 
-      <h4 class="section-title">¿Quieres agregar video?</h4>
-      <ion-select [(ngModel)]="incluirVideo" (ionChange)="actualizarPrecio()">
-        <ion-select-option [value]="false">No incluir video</ion-select-option>
-        <ion-select-option [value]="true">Sí, agregar video (+${{ costoVideo }})</ion-select-option>
-      </ion-select>
+      
 
       <h4 class="section-title">Incluye:</h4>
       <ul>
