@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar class="bg-black">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/formulario">
+        <ion-icon slot="icon-only" name="arrow-back" class="text-light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-light">Método de Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-black">
+  <div class="container mt-4">
+    <!-- Detalle del paquete seleccionado sin tarjeta -->
+    <div class="p-4 text-center">
+      <h4 class="text-light font-weight-bold">{{ paqueteSeleccionado.nombre }}</h4>
+      <p class="text-primary font-weight-bold">Total: ${{ paqueteSeleccionado.precio }}</p>
+    </div>
+
+    <!-- Selección de método de pago -->
+    <div class="list-group mt-4">
+      <a 
+        [class.active]="selectedMethod === 'tarjetaCredito'"
+        class="list-group-item payment-method"
+        (click)="selectPaymentMethod('tarjetaCredito')">
+        <ion-icon name="card-outline" class="icono-metodo"></ion-icon>
+        <span class="text-light">Tarjeta de Crédito</span>
+      </a>
+
+      <a 
+        [class.active]="selectedMethod === 'tarjetaDebito'"
+        class="list-group-item payment-method"
+        (click)="selectPaymentMethod('tarjetaDebito')">
+        <ion-icon name="card-outline" class="icono-metodo"></ion-icon>
+        <span class="text-light">Tarjeta de Débito</span>
+      </a>
+
+      <a 
+        [class.active]="selectedMethod === 'oxxo'"
+        class="list-group-item payment-method"
+        (click)="selectPaymentMethod('oxxo')">
+        <ion-icon name="storefront-outline" class="icono-metodo"></ion-icon>
+        <span class="text-light">Pago en OXXO</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Formulario de pago -->
+  <div *ngIf="selectedMethod" class="pago-form mt-4">
+    <h3 class="text-light text-center mb-3">Pago con {{ selectedMethodName }}</h3>
+
+    <form (ngSubmit)="submitPayment()" class="p-3">
+
+      <div *ngIf="selectedMethod === 'tarjetaCredito' || selectedMethod === 'tarjetaDebito'">
+        <ion-item class="input-container">
+          <ion-label position="floating">Nombre en la tarjeta</ion-label>
+          <ion-input type="text" [(ngModel)]="formData.nombreTarjeta" name="nombreTarjeta" required placeholder="Ejemplo: Juan Pérez"></ion-input>
+        </ion-item>
+
+        <ion-item class="input-container">
+          <ion-label position="floating">Número de tarjeta</ion-label>
+          <ion-input type="text" [(ngModel)]="formData.numeroTarjeta" name="numeroTarjeta" maxlength="16" minlength="16" required pattern="^[0-9]{16}$" placeholder="1234 5678 9012 3456"></ion-input>
+        </ion-item>
+
+        <div class="row">
+          <div class="col-6">
+            <ion-item class="input-container">
+              <ion-label position="floating">Expiración</ion-label>
+              <ion-input type="text" [(ngModel)]="formData.expiracion" name="expiracion" maxlength="5" minlength="5" required pattern="^(0[1-9]|1[0-2])\/\d{2}$" placeholder="MM/YY"></ion-input>
+            </ion-item>
+          </div>
+
+          <div class="col-6">
+            <ion-item class="input-container">
+              <ion-label position="floating">CVV</ion-label>
+              <ion-input type="password" [(ngModel)]="formData.cvv" name="cvv" maxlength="3" minlength="3" required pattern="^[0-9]{3}$" placeholder="123"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedMethod === 'oxxo'">
+        <p class="text-light text-center">Recibirás un código para pagar en cualquier tienda OXXO.</p>
+        <ion-button expand="block" (click)="generatePdfWithQRCode()" color="primary">Descargar código QR</ion-button>
+      </div>
+
+      <ion-button expand="block" type="submit" color="primary" class="mt-3" [disabled]="!formData.numeroTarjeta || !formData.expiracion || !formData.cvv">Confirmar pago</ion-button>
+    </form>
+  </div>
+</ion-content>

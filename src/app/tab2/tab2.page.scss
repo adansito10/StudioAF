@@ -1,0 +1,47 @@
+.page-container {
+    background-color: black; // Fondo negro
+    min-height: 100vh; // Asegura que cubra toda la pantalla
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; // Espaciado alrededor de la tarjeta
+  }
+  
+
+
+
+
+  .page-container {
+    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .card {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .img-small {
+    height: 400px;
+    object-fit: cover;
+  }
+  
+
+
+  ion-menu-button {
+    --color: white;  
+  }
+  
+
+
+
+  .ion-page{
+    background-color: black;
+  }

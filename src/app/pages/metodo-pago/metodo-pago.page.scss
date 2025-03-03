@@ -1,0 +1,81 @@
+$primary: #1E88E5; // Azul brillante
+$dark-bg: #000000; // Negro total
+$card-bg: #000000; // Gris oscuro
+$text-light: #FFFFFF;
+$default-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+
+body {
+  background: $dark-bg;
+  color: $text-light;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.payment-card {
+  background: $card-bg;
+  border-radius: .5rem;
+  box-shadow: $default-shadow;
+  color: $text-light;
+  text-align: center;
+}
+
+.payment-method {
+  background: $card-bg;
+  color: $text-light;
+  padding: 1rem;
+  border-radius: .5rem;
+  transition: all ease .2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: rgba($primary, .2);
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &.active {
+    background: rgba($primary, .3);
+    border-color: $primary;
+    color: $primary;
+  }
+
+  .icono-metodo {
+    margin-right: 10px;
+    color: $primary;
+    font-size: 24px;
+  }
+}
+
+.input-container {
+  border-radius: .5rem;
+  box-shadow: $default-shadow;
+  background: $card-bg;
+  color: $text-light;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  ion-label {
+    color: $text-light;
+  }
+
+  ion-input {
+    color: $text-light;
+  }
+
+  &:focus-within {
+    border: 1px solid $primary;
+    box-shadow: 0 0 8px rgba($primary, 0.6);
+  }
+}
+
+.pago-form {
+  padding: 2rem;
+  background: $card-bg;
+  border-radius: .5rem;
+  box-shadow: $default-shadow;
+  margin-bottom: 3rem;
+}

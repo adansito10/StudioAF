@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar class="bg-dark">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/tab1">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-light">Pago Confirmado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-dark">
+  <div class="container mt-3">
+    <div class="card bg-black text-light p-3">
+      <h4 class="card-title">Pago realizado con éxito</h4>
+      <p class="card-text">El pago por el {{ paqueteSeleccionado.nombre }} ha sido procesado.</p>
+      <p class="card-text">Total: ${{ paqueteSeleccionado.precio }}</p>
+    </div>
+
+    <ion-button expand="block" routerLink="/consultas" color="primary">
+      Ver consulta/pedido
+    </ion-button>
+  </div>
+</ion-content>

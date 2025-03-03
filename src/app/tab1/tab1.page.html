@@ -1,0 +1,145 @@
+<ion-app>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list>
+        
+        <ion-item routerLink="/consultas" routerDirection="root" color="transparent">
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          <ion-label>Mis pedidos</ion-label>
+        </ion-item>
+        <ion-item routerLink="/tabs/tab2" routerDirection="root" color="transparent">
+          <ion-icon slot="start" name="briefcase-outline"></ion-icon>
+          <ion-label>Servicios</ion-label>
+        </ion-item>
+        <ion-item routerLink="/contacto" routerDirection="root" color="transparent">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Contacto</ion-label>
+        </ion-item> 
+        <ion-item routerLink="/login" routerDirection="root" color="transparent">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar sesión</ion-label>
+        </ion-item>
+       
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      Tap the button in the toolbar to open the menu.
+    </ion-content>
+  </div>
+  
+
+  <!-- Contenido principal -->
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>STUDIO AF</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <!-- Sección Bienvenida -->
+      <ion-text>
+        <h1 class="bienvenida">Bienvenido</h1>
+      </ion-text>
+
+      <!-- Carrusel horizontal -->
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button *ngFor="let slide of slides; let i = index" type="button" [attr.data-bs-slide-to]="i" [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)"></button>
+        </div>
+        <div class="carousel-inner">
+          <div *ngFor="let slide of slides; let i = index" class="carousel-item" [class.active]="i === 0">
+            <img [src]="slide.image" class="d-block w-100" alt="...">
+            <div class="carousel-caption overlay">
+              <h5 class="game-title">{{ slide.title }}</h5>
+              <p class="game-description">{{ slide.description }}</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!-- Sección Explora Nuestras Fotos -->
+      <ion-text>
+        <h2 class="explora">Explora Nuestras Fotos</h2>
+      </ion-text>
+
+      <div class="image-slider">
+        <ion-card *ngFor="let game of games" class="offer-card" (click)="openGallery(game)">
+          <ion-img [src]="game.cover" alt="{{ game.title }}"></ion-img>
+          <div class="overlay">
+            <p class="game-title">{{ game.title }}</p>
+          </div>
+        </ion-card>
+        <ion-card class="offer-card">
+          <ion-img src="https://images.unsplash.com/photo-1564754943164-e83c08469116?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D" alt="Game Image"></ion-img>
+          <div class="overlay">
+            <p class="game-title">Game Title</p>
+          </div>
+        </ion-card>
+      </div>
+
+      <ion-text>
+        <h2 class="adaptamos">Nos adaptamos a tu estilo</h2>
+      </ion-text>
+
+      <ion-card class="promo-card">
+        <ion-img src="assets/images/casual1.jpg" alt="Video Evento"></ion-img>
+        <ion-card-content>
+          <h3 class="game-title">Conoce nuestros paquetes</h3>
+          <p class="platform">Para cualquier eventeo con fotos 100% profesionalees</p>
+          <ion-button expand="full" routerLink="/tabs/tab2">Ver Servicios</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="video-card">
+        <video autoplay loop muted playsinline class="video-content">
+          <source src="assets/images/promo.mp4" type="video/mp4">
+          Tu navegador no soporta videos.
+        </video>
+        <ion-card-content>
+          <h3 class="game-title">Descubre nuestros videos</h3>
+          <p class="platform">¡No te pierdas nuestros exclusivos paquetes para eventos!</p>
+          <ion-button expand="full" routerLink="/tabs/tab2">Ver Servicios</ion-button>
+        </ion-card-content>
+      </ion-card>
+      
+
+      
+    </ion-content>
+  </div>
+
+
+
+
+
+
+  
+</ion-app>

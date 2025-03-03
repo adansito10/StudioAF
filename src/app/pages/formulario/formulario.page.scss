@@ -1,0 +1,21 @@
+.bienvenida {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    padding: 20px;
+    display: inline-block;
+    font-style: italic;
+}
+
+
+.text-right {
+  position: absolute;  /* Esto permite mover el elemento libremente */
+  right: 20px;         /* Se ajusta a 10px del borde derecho de su contenedor */
+  top: 28%;            /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajuste para centrar mejor */
+  cursor: pointer;
+  color: #00ff08;
+  text-decoration: underline;
+}
+
+  

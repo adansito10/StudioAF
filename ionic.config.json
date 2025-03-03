@@ -1,0 +1,7 @@
+{
+  "name": "StudioAf",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

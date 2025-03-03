@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar class="bg-dark">
+    <ion-buttons slot="start">
+      <ion-button (click)="irATab1()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-light">Mis Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-dark ion-padding">
+  <div *ngIf="pedidos.length > 0; else noPedidos">
+    <ion-card *ngFor="let pedido of pedidos" class="pedido-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="cube-outline"></ion-icon> {{ pedido.nombre }}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Precio:</strong> ${{ pedido.precio }}</p>
+        <p><strong>Fecha del evento:</strong> {{ pedido.fechaCompra }}</p>
+        <ion-chip [color]="getEstadoColor(pedido.estado)">
+          <ion-label>{{ pedido.estado | uppercase }}</ion-label>
+        </ion-chip>
+        <div class="d-flex justify-content-between mt-3">
+          <ion-button color="danger" *ngIf="pedido.estado === 'pendiente'" (click)="cancelarPedido(pedido)">
+            <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+            Cancelar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ng-template #noPedidos>
+    <div class="text-center text-light">
+      <p>No se ha encontrado ningún pedido.</p>
+    </div>
+  </ng-template>
+</ion-content>

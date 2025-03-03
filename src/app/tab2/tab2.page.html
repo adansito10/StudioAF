@@ -1,0 +1,26 @@
+
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-title>Servicios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <div *ngFor="let servicio of servicios" class="card text-white bg-dark border-0 rounded-4">
+      <img [src]="servicio.imagen" class="card-img-top rounded-top-4 img-small" [alt]="servicio.titulo">
+      <div class="card-body">
+        <h5 class="card-title fw-bold">{{ servicio.titulo }}</h5>
+        <p class="card-text">{{ servicio.descripcion }}</p>
+        <a routerLink="/detalle-servicio" [queryParams]="{ nombre: servicio.titulo, descripcion: servicio.descripcion, imagen: servicio.imagen, video: servicio.video }" class="btn btn-light text-dark d-flex align-items-center gap-2">
+          <ion-icon name="open-outline"></ion-icon>
+          Ver más detalles
+        </a>
+      </div>
+    </div>
+  </ion-content>
+  
+</div>

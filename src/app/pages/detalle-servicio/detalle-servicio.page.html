@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar class="bg-dark">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/tab2">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-light">Detalles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="card">
+    
+    <!-- Carrusel de Bootstrap -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="20000">
+      <div class="carousel-inner">
+        <!-- Imagen del servicio -->
+        <div class="carousel-item active">
+          <img [src]="servicio.imagen" class="d-block w-100 img-fluid" alt="Imagen">
+        </div>
+        
+        <!-- Video del servicio, que se muestra si está activado -->
+        <div class="carousel-item" *ngIf="incluirVideo">
+          <video width="100%" controls>
+            <source [src]="servicio.video" type="video/mp4">
+            Tu navegador no soporta el formato de video.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del servicio -->
+    <div class="card-body">
+      <h2 class="card-title">{{ servicio.nombre }}</h2>
+      <h5 class="card-subtitle">{{ servicio.descripcion }}</h5>
+
+      
+
+      <h4 class="section-title">Incluye:</h4>
+      <ul>
+        <li *ngFor="let item of servicio.contenido">{{ item }}</li>
+        <li *ngIf="incluirVideo">🎥 Video resumen</li>
+      </ul>
+
+
+      <h4>Extras seleccionados:</h4>
+      <ul>
+        <li *ngIf="detallesExtras.horasExtras > 0">⏳ {{ detallesExtras.horasExtras }} horas extras</li>
+        <li *ngIf="detallesExtras.camarografoExtra">📸 Camarógrafo extra</li>
+        <li *ngIf="detallesExtras.setGrabacion">🎬 Set de grabación</li>
+        <li *ngIf="detallesExtras.videoEvento">🎥 Video del evento</li>
+        <li><strong>Fecha:</strong> {{ detallesExtras.fecha }}</li>
+        <li><strong>Hora:</strong> {{ detallesExtras.hora }}</li>
+      </ul>
+    </div>
+
+
+    
+
+    <!-- Precio en la parte superior derecha -->
+    <div class="price-container">
+      <h4 class="section-title">Precio: ${{ precioTotal }}</h4>
+    </div>
+
+    <!-- Botón en la parte inferior -->
+    <button [routerLink]="['/nueva-pagina']" 
+    [queryParams]="{
+      nombre: servicio.nombre,
+      descripcion: servicio.descripcion,
+      imagen: servicio.imagen,
+      video: servicio.video,
+      horasExtras: detallesExtras.horasExtras,
+      camarografoExtra: detallesExtras.camarografoExtra,
+      setGrabacion: detallesExtras.setGrabacion,
+      videoEvento: detallesExtras.videoEvento,
+      fecha: detallesExtras.fecha,
+      hora: detallesExtras.hora
+    }"
+    class="btn-contratar">
+MODIFICAR
+</button>    <button 
+[routerLink]="['/formulario']"
+[queryParams]="{
+  nombre: servicio.nombre,
+  precio: precioTotal
+}"
+class="btn-contratar">
+CONTRATAR
+</button>
+
+  </div>
+</ion-content>

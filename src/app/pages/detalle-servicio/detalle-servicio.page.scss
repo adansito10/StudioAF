@@ -1,0 +1,62 @@
+.card {
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .carousel {
+    max-width: 100%;
+  }
+  
+  .carousel-item img, 
+  .carousel-item video {
+    max-height: 250px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .card-subtitle {
+    font-size: 16px;
+    color: #bbb;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .btn-contratar {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+  
+  .btn-contratar:hover {
+    background-color: #a46ac1;
+  }
+  
+
+  
+
+
+
+  

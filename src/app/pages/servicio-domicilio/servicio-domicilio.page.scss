@@ -1,0 +1,25 @@
+/* Forzar todo el fondo negro y texto blanco */
+ion-content {
+    --background: black !important;
+    color: white !important;
+  }
+  
+  /* Forzar el color de los inputs y tarjetas */
+  .card {
+    background-color: black !important;
+    color: white !important;
+  }
+  
+  input, textarea {
+    background-color: black !important;
+    color: white !important;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #cccccc !important;
+  }
+  
+  .form-label, p {
+    color: white !important;
+  }
+  

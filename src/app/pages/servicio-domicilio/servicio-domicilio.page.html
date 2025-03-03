@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/formulario">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Servicio a domicilio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-dark text-white">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm bg-dark text-white border-light">
+          <div class="card-body">
+
+            <!-- Botón para agregar ubicación -->
+            <div class="d-grid mb-3">
+              <button class="btn btn-light text-dark" (click)="usarUbicacion()">📍 Agregar mi ubicación</button>
+            </div>
+
+            <!-- Formulario -->
+            <form (submit)="enviarFormulario()">
+              <div class="mb-3">
+                <label for="direccion" class="form-label text-white">Dirección del Evento</label>
+                <input type="text" class="form-control bg-dark text-white border-light"
+                       id="direccion" [(ngModel)]="formulario.direccion" name="direccion"
+                       placeholder="Ingresa la dirección"
+                       [disabled]="ubicacionConfirmada" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="codigoPostal" class="form-label text-white">Código Postal</label>
+                <input type="text" class="form-control bg-dark text-white border-light"
+                       id="codigoPostal" [(ngModel)]="formulario.codigoPostal" name="codigoPostal"
+                       placeholder="Código postal"
+                       [disabled]="ubicacionConfirmada" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="estado" class="form-label text-white">Estado</label>
+                <input type="text" class="form-control bg-dark text-white border-light"
+                       id="estado" [(ngModel)]="formulario.estado" name="estado"
+                       [disabled]="ubicacionConfirmada" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="municipio" class="form-label text-white">Municipio</label>
+                <input type="text" class="form-control bg-dark text-white border-light"
+                       id="municipio" [(ngModel)]="formulario.municipio" name="municipio"
+                       [disabled]="ubicacionConfirmada" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="indicaciones" class="form-label text-white">Indicaciones para el Fotógrafo (opcional)</label>
+                <textarea class="form-control bg-dark text-white border-light"
+                          id="indicaciones" [(ngModel)]="formulario.indicaciones" name="indicaciones"
+                          placeholder="Ej: Entrada por la puerta trasera, estacionamiento disponible..."
+                          rows="3"></textarea>
+              </div>
+
+              <!-- Datos de contacto -->
+              <p class="text-center text-white">Nos pondremos en contacto contigo para confirmar los detalles.</p>
+
+              <!-- Botón de confirmar reservación -->
+              <button routerLink="/metodo-pago" type="submit" class="btn btn-light text-dark w-100">Confirmar Reservación</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

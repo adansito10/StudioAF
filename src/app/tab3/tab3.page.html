@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar style="background-color: black !important;">
+    <ion-title class="text-center text-white">Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding profile-container">
+  <div class="profile-header position-relative">
+    <img [src]="profileImage" class="profile-img" alt="Foto de perfil">
+    <button class="btn camera-btn" (click)="changeProfilePicture()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </button>
+  </div>
+
+  <div class="profile-info text-center">
+    <h3 class="fw-bold text-white">
+      <ion-input *ngIf="isEditing" [(ngModel)]="userData.name"></ion-input>
+      <span *ngIf="!isEditing">{{ userData.name }}</span>
+    </h3>
+
+    <p class="text-muted">
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-input *ngIf="isEditing" [(ngModel)]="userData.email"></ion-input>
+      <span *ngIf="!isEditing">{{ userData.email }}</span>
+    </p>
+
+    <p class="text-muted">
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-input *ngIf="isEditing" [(ngModel)]="userData.phone"></ion-input>
+      <span *ngIf="!isEditing">{{ userData.phone }}</span>
+    </p>
+
+    <!-- Botones de acción -->
+    <button *ngIf="!isEditing" class="btn btn-primary w-100 mt-4 shadow" (click)="toggleEdit()">Editar</button>
+    <div *ngIf="isEditing">
+      <button class="btn btn-success w-100 mt-2 shadow" (click)="saveChanges()">Guardar</button>
+      <button class="btn btn-danger w-100 mt-2 shadow" (click)="toggleEdit()">Cancelar</button>
+    </div>
+  </div>
+</ion-content>
