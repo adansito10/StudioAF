@@ -80,6 +80,16 @@ export class DetalleServicioPage implements OnInit {
           ];
           this.servicio.video = 'assets/videos/paquete-infantil.mp4';
           break;
+
+
+          case 'Paquete Familiar':
+            this.servicio.precio = 1500;
+            this.servicio.contenido = [
+              '30 fotos de alta calidad',
+              'Foto retrato'
+            ];
+            this.servicio.video = 'assets/videos/paquete-infantil.mp4';
+            break;
         default:
           this.servicio.precio = 0;
           this.servicio.contenido = ['Información no disponible'];
