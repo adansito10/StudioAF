@@ -49,6 +49,10 @@ const routes: Routes = [
   {
     path: 'nueva-pagina',
     loadChildren: () => import('./nueva-pagina/nueva-pagina.module').then( m => m.NuevaPaginaPageModule)
+  },
+  {
+    path: 'resumen-servicio',
+    loadChildren: () => import('./resumen-servicio/resumen-servicio.module').then( m => m.ResumenServicioPageModule)
   }
   
  

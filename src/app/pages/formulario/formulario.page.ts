@@ -13,7 +13,19 @@ export class FormularioPage implements OnInit {
   // Variables para los datos pasados a través de queryParams
   servicio: any = {
     nombre: '',
+    descripcion: '',
+    imagen: '',
+    contenido: [],
     precio: 0
+  };
+
+  detallesExtras: any = {
+    horasExtras: 0,
+    camarografoExtra: false,
+    setGrabacion: false,
+    videoEvento: false,
+    fecha: '',
+    hora: ''
   };
 
   precioTotal: number = 0;
@@ -29,6 +41,26 @@ export class FormularioPage implements OnInit {
         console.log('Servicio recibido:', this.servicio);
         console.log('Precio total:', this.precioTotal);
       }
+
+      // Recibir los datos adicionales
+      this.servicio = {
+        nombre: params['nombre'],
+        descripcion: params['descripcion'],
+        imagen: params['imagen'],
+        contenido: params['contenido'] ? params['contenido'].split(',') : [],
+        precio: +params['precio'] || 0
+      };
+
+      this.detallesExtras = {
+        horasExtras: +params['horasExtras'] || 0,
+        camarografoExtra: params['camarografoExtra'] === 'true',
+        setGrabacion: params['setGrabacion'] === 'true',
+        videoEvento: params['videoEvento'] === 'true',
+        fecha: params['fecha'] || 'No especificada',
+        hora: params['hora'] || 'No especificada'
+      };
+
+      this.precioTotal = +params['precioTotal'] || this.servicio.precio;  // Actualizar precio total
     });
 
     // Recuperar el domicilio de localStorage

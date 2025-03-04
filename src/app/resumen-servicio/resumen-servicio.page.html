@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar class="bg-dark">
+    <ion-title class="text-light">Resumen del Servicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{ servicio.nombre }}</h2>
+      <h5 class="card-subtitle">{{ servicio.descripcion }}</h5>
+      <img [src]="servicio.imagen" class="d-block w-100 img-fluid" alt="Imagen">
+
+      <h4 class="section-title">Incluye:</h4>
+      <ul>
+        <li *ngFor="let item of servicio.contenido">{{ item }}</li>
+      </ul>
+
+      <h4>Extras seleccionados:</h4>
+      <ul>
+        <li *ngIf="detallesExtras.horasExtras > 0">⏳ {{ detallesExtras.horasExtras }} horas extras</li>
+        <li *ngIf="detallesExtras.camarografoExtra">📸 Camarógrafo extra</li>
+        <li *ngIf="detallesExtras.setGrabacion">🎬 Set de grabación</li>
+        <li *ngIf="detallesExtras.videoEvento">🎥 Video del evento</li>
+        <li><strong>Fecha:</strong> {{ detallesExtras.fecha }}</li>
+        <li><strong>Hora:</strong> {{ detallesExtras.hora }}</li>
+      </ul>
+    </div>
+
+    <div class="price-container">
+      <h4 class="section-title">Precio Total: ${{ precioTotal }}</h4>
+    </div>
+
+    <button 
+    routerLink="/formulario" 
+    [queryParams]="{
+      nombre: servicio.nombre,
+      descripcion: servicio.descripcion,
+      imagen: servicio.imagen,
+      contenido: servicio.contenido.join(','),
+      precio: servicio.precio,
+      horasExtras: detallesExtras.horasExtras,
+      camarografoExtra: detallesExtras.camarografoExtra,
+      setGrabacion: detallesExtras.setGrabacion,
+      videoEvento: detallesExtras.videoEvento,
+      fecha: detallesExtras.fecha,
+      hora: detallesExtras.hora,
+      precioTotal: precioTotal
+    }" class="btn-contratar"  >
+
+    
+    Finalizar Contratación
+  </button>
+    </div>
+</ion-content>

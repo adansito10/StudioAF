@@ -18,22 +18,22 @@
             <form (ngSubmit)="enviarFormulario()">
               <div class="mb-3">
                 <label class="form-label">Horas Extras:</label>
-                <input type="number" [(ngModel)]="formulario.horasExtras" name="horasExtras" class="form-control" min="0">
+                <input type="number" [(ngModel)]="formulario.horasExtras" name="horasExtras" class="form-control" min="0" (change)="actualizarPrecio()">
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Camarógrafo Extra:</label>
-                <input type="checkbox" [(ngModel)]="formulario.camarografoExtra" name="camarografoExtra" class="form-check-input">
+                <input type="checkbox" [(ngModel)]="formulario.camarografoExtra" name="camarografoExtra" class="form-check-input" (change)="actualizarPrecio()">
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Set de Fotos Rotativo:</label>
-                <input type="checkbox" [(ngModel)]="formulario.setGrabacion" name="setGrabacion" class="form-check-input">
+                <input type="checkbox" [(ngModel)]="formulario.setGrabacion" name="setGrabacion" class="form-check-input" (change)="actualizarPrecio()">
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Agregar Video del Evento:</label>
-                <input type="checkbox" [(ngModel)]="formulario.videoEvento" name="videoEvento" class="form-check-input">
+                <input type="checkbox" [(ngModel)]="formulario.videoEvento" name="videoEvento" class="form-check-input" (change)="actualizarPrecio()">
               </div>
 
               <div class="mb-3">
@@ -45,6 +45,8 @@
                 <label class="form-label">Hora:</label>
                 <input type="time" [(ngModel)]="formulario.hora" name="hora" class="form-control" step="1800">
               </div>
+
+              <h4 class="text-light">Precio Total: ${{ precioTotal }}</h4> <!-- Mostrar el precio actualizado -->
 
               <button type="submit" class="btn btn-light w-100">Confirmar</button>
             </form>
