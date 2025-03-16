@@ -85,7 +85,7 @@ export class MetodoPagoPage implements OnInit {
       doc.addImage(url, 'PNG', 10, 30, 50, 50);  // Agregar el código QR al PDF
 
       // Descargar el PDF
-      saveAs(doc.output('blob'), 'pago_oxxo.pdf');
+      this.saveAs(doc.output('blob'), 'pago_oxxo.pdf');
     });
   }
 
@@ -104,27 +104,8 @@ export class MetodoPagoPage implements OnInit {
     doc.text(`Total: $${this.paqueteSeleccionado.precio}`, 10, 50);
     doc.text(`Método de Pago: ${this.selectedMethodName}`, 10, 60);
 
-    // Agregar el HTML para el pago con tarjeta
-    if (this.selectedMethod === 'tarjetaGuardada' || this.selectedMethod === 'tarjetaCredito' || this.selectedMethod === 'tarjetaDebito') {
-      doc.addPage();
-      doc.setFontSize(12);
-      doc.text('Detalles del Pago con Tarjeta', 10, 10);
-
-      const htmlContent = `
-       
-      `;
-
-      doc.html(htmlContent, {
-        callback: function (doc) {
-          saveAs(doc.output('blob'), 'comprobante_pago_tarjeta.pdf');
-        },
-        x: 10,
-        y: 70
-      });
-    } else {
-      // Guardar el PDF sin HTML adicional
-      saveAs(doc.output('blob'), 'comprobante_pago.pdf');
-    }
+    // Guardar el PDF
+    this.saveAs(doc.output('blob'), 'comprobante_pago.pdf');
   }
 
   generateSimpleReceipt() {
@@ -143,30 +124,31 @@ export class MetodoPagoPage implements OnInit {
     doc.text(`Método de Pago: ${this.selectedMethodName}`, 10, 60);
 
     // Guardar el PDF
-    saveAs(doc.output('blob'), 'comprobante_pago.pdf');
+    this.saveAs(doc.output('blob'), 'comprobante_pago.pdf'); // En lugar de saveAs
   }
-}
 
-function saveAs(blob: Blob | MediaSource, fileName: string) {
-  try {
-    // Crear un enlace temporal para la descarga
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
+  // Función para descargar el archivo
+  saveAs(blob: Blob | MediaSource, fileName: string) {
+    try {
+      // Crear un enlace temporal para la descarga
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
 
-    // Configurar el enlace
-    link.href = url;
-    link.download = fileName;
+      // Configurar el enlace
+      link.href = url;
+      link.download = fileName;
 
-    // Agregar el enlace al documento y simular un clic
-    document.body.appendChild(link);
-    link.click();
+      // Agregar el enlace al documento y simular un clic
+      document.body.appendChild(link);
+      link.click();
 
-    // Eliminar el enlace del documento
-    document.body.removeChild(link);
+      // Eliminar el enlace del documento
+      document.body.removeChild(link);
 
-    // Revocar el objeto URL
-    URL.revokeObjectURL(url);
-  } catch (error) {
-    console.error('Error al guardar el archivo:', error);
+      // Revocar el objeto URL
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error al guardar el archivo:', error);
+    }
   }
 }
