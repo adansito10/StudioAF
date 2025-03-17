@@ -1,8 +1,15 @@
 <ion-content class="login-container">
+  <!-- Contenedor para la imagen centrada -->
+  <div class="image-container">
+    <img src="assets/images/logoblanco.png" alt="Imagen de inicio de sesión" class="login-image" />
+    <h2 class="login-title">Inicio de sesión</h2> <!-- Texto añadido -->
+  </div>
+
+  <!-- Caja del formulario -->
   <div class="login-box">
     <ion-item class="input-field">
       <ion-icon name="person" slot="start"></ion-icon>
-      <ion-input placeholder="Correo eletronico"></ion-input>
+      <ion-input placeholder="Correo electrónico"></ion-input>
     </ion-item>
 
     <ion-item class="input-field">
@@ -10,10 +17,10 @@
       <ion-input type="password" placeholder="Contraseña"></ion-input>
     </ion-item>
 
-    <ion-button routerLink="/tabs/tab1" expand="full" class="login-button">Iniciar sesion</ion-button>
+    <ion-button routerLink="/tabs/tab1" expand="full" class="login-button">Iniciar sesión</ion-button>
 
     <p class="signup-text">
-      No tienes una cuenta? <a routerLink="/registro" class="signup-link">Registrate aqui →</a>
+      ¿No tienes una cuenta? <a routerLink="/registro" class="signup-link">Regístrate aquí →</a>
     </p>
   </div>
 </ion-content>
