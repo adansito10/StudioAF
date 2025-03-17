@@ -1,81 +1,56 @@
-$primary: #1E88E5; // Azul brillante
-$dark-bg: #000000; // Negro total
-$card-bg: #000000; // Gris oscuro
-$text-light: #FFFFFF;
-$default-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
-
-body {
-  background: $dark-bg;
-  color: $text-light;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+ion-content {
+  --background: #000000; /* Fondo negro */
+  --ion-background-color: #000000;
 }
 
-.payment-card {
-  background: $card-bg;
-  border-radius: .5rem;
-  box-shadow: $default-shadow;
-  color: $text-light;
-  text-align: center;
-}
-
-.payment-method {
-  background: $card-bg;
-  color: $text-light;
-  padding: 1rem;
-  border-radius: .5rem;
-  transition: all ease .2s;
+ion-card {
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra ligera */
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: 1px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-  &:hover {
-    background: rgba($primary, .2);
-    border-color: $primary;
-    color: $primary;
-  }
-
-  &.active {
-    background: rgba($primary, .3);
-    border-color: $primary;
-    color: $primary;
-  }
-
-  .icono-metodo {
-    margin-right: 10px;
-    color: $primary;
-    font-size: 24px;
+  &.selected {
+    transform: scale(1.05); /* Resalte al seleccionar */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.5); /* Resalte azul */
+    border: 2px solid #007bff; /* Borde azul */
   }
 }
 
-.input-container {
-  border-radius: .5rem;
-  box-shadow: $default-shadow;
-  background: $card-bg;
-  color: $text-light;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease-in-out;
-
-  ion-label {
-    color: $text-light;
-  }
-
-  ion-input {
-    color: $text-light;
-  }
-
-  &:focus-within {
-    border: 1px solid $primary;
-    box-shadow: 0 0 8px rgba($primary, 0.6);
-  }
+.visa-card {
+  background: linear-gradient(90deg, #000000, #000000a2); /* Gradiente para Visa */
 }
 
-.pago-form {
-  padding: 2rem;
-  background: $card-bg;
-  border-radius: .5rem;
-  box-shadow: $default-shadow;
-  margin-bottom: 3rem;
+.mastercard-card {
+  background: linear-gradient(90deg, #000000, #000000); /* Gradiente para Mastercard */
 }
+
+.paypal-card {
+  background: linear-gradient(90deg, #000000, #000000); /* Gradiente para PayPal */
+}
+
+ion-item {
+  margin-bottom: 12px;
+}
+
+
+.bienvenida {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  padding: 20px;
+  display: inline-block;
+  font-style: italic;
+}
+
+.custom-confirm-button {
+  --background: #5e4e84; // Color azul claro
+  --background-activated: #5e4e84; // Color al hacer clic
+  --color: #ffffff; // Texto blanco
+  --border-radius: 8px; // Bordes redondeados
+  height: 50px; // Altura similar al botón de la imagen
+  text-transform: none; // Texto sin mayúsculas
+  font-weight: bold; // Texto en negrita
+}
+
+
