@@ -6,25 +6,25 @@
   <div class="login-box">
     <ion-item class="input-field">
       <ion-icon name="person" slot="start"></ion-icon>
-      <ion-input placeholder="Nombre completo"></ion-input>
+      <ion-input [(ngModel)]="nombre" placeholder="Nombre completo"></ion-input>
     </ion-item>
 
     <ion-item class="input-field">
       <ion-icon name="mail" slot="start"></ion-icon>
-      <ion-input type="email" placeholder="Correo electrónico"></ion-input>
+      <ion-input type="email" [(ngModel)]="correo" placeholder="Correo electrónico"></ion-input>
     </ion-item>
 
     <ion-item class="input-field">
       <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-input type="password" placeholder="Contraseña"></ion-input>
+      <ion-input type="password" [(ngModel)]="contrasena" placeholder="Contraseña"></ion-input>
     </ion-item>
 
     <ion-item class="input-field">
       <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-input type="password" placeholder="Confirmar contraseña"></ion-input>
+      <ion-input type="password" [(ngModel)]="confirmarContrasena" placeholder="Confirmar contraseña"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" class="login-button">Registrarse</ion-button>
+    <ion-button expand="full" class="login-button" (click)="onRegister()">Registrarse</ion-button>
 
     <p class="signup-text">
       ¿Ya tienes una cuenta? <a routerLink="/login" class="signup-link">Inicia sesión aquí →</a>
