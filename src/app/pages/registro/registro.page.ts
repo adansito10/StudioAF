@@ -43,11 +43,11 @@ export class RegistroPage {
     try {
       console.log('Enviando registro:', { nombre: this.nombre, correo: this.correo, contrasena: this.contrasena });
       await this.authService.register(this.nombre, this.correo, this.contrasena).toPromise();
-      await loading.dismiss(); // Cierra el spinner
+      await loading.dismiss(); 
       this.router.navigate(['/tabs/tab1']);
     } catch (error) {
       console.error('Error en registro:', error);
-      await loading.dismiss(); // Cierra el spinner incluso si hay error
+      await loading.dismiss(); 
       alert('Error al registrar usuario: ' + ((error as any).error?.error || 'Error desconocido'));
     }
   }

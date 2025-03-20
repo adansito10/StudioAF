@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Opciones Extras</ion-title>
+    <ion-title>Opciones Adicionales</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,38 +16,75 @@
         <div class="card shadow-sm bg-dark text-white border-light">
           <div class="card-body">
             <form (ngSubmit)="enviarFormulario()">
-              <div class="mb-3">
-                <label class="form-label">Horas Extras:</label>
-                <input type="number" [(ngModel)]="formulario.horasExtras" name="horasExtras" class="form-control" min="0" (change)="actualizarPrecio()">
+              <!-- Campo común: Horas Extras -->
+             
+
+              <!-- Campos específicos para Paquete de Bodas -->
+              <div *ngIf="tipoServicio === 'Paquete de Bodas'">
+                <div class="mb-3">
+                  <label class="form-label">Video resumen de boda ($1500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.camarografoExtra" name="camarografoExtra" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Photobooth para invitados ($1200):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.drone" name="drone" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Álbum Premium ($600):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.albumPremium" name="albumPremium" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
-              <div class="mb-3">
-                <label class="form-label">Camarógrafo Extra:</label>
-                <input type="checkbox" [(ngModel)]="formulario.camarografoExtra" name="camarografoExtra" class="form-check-input" (change)="actualizarPrecio()">
+              <!-- Campos específicos para Paquete de XV Años -->
+              <div *ngIf="tipoServicio === 'Paquete de XV Años'">
+                <div class="mb-3">
+                  <label class="form-label">Maquillaje ($500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.maquillaje" name="maquillaje" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Video de Coreografía ($1000):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.videoCoreografia" name="videoCoreografia" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
-              <div class="mb-3">
-                <label class="form-label">Set de Fotos Rotativo:</label>
-                <input type="checkbox" [(ngModel)]="formulario.setGrabacion" name="setGrabacion" class="form-check-input" (change)="actualizarPrecio()">
+              <!-- Campos específicos para Paquete BabyShower -->
+              <div *ngIf="tipoServicio === 'Paquete BabyShower'">
+                <div class="mb-3">
+                  <label class="form-label">Decoración Extra ($400):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.decoracionExtra" name="decoracionExtra" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Video Recuerdo ($700):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.videoRecuerdo" name="videoRecuerdo" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
-              <div class="mb-3">
-                <label class="form-label">Agregar Video del Evento:</label>
-                <input type="checkbox" [(ngModel)]="formulario.videoEvento" name="videoEvento" class="form-check-input" (change)="actualizarPrecio()">
+              <!-- Campos específicos para Paquete Familiar -->
+              <div *ngIf="tipoServicio === 'Paquete Familiar'">
+                <div class="mb-3">
+                  <label class="form-label">Locación Extra ($300):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.locacionExtra" name="locacionExtra" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Marco de Fotos ($200):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.marcoFotos" name="marcoFotos" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
+              <!-- Campos comunes: Fecha y Hora -->
               <div class="mb-3">
                 <label class="form-label">Fecha:</label>
                 <input type="date" [(ngModel)]="formulario.fecha" name="fecha" class="form-control">
               </div>
-
               <div class="mb-3">
                 <label class="form-label">Hora:</label>
                 <input type="time" [(ngModel)]="formulario.hora" name="hora" class="form-control" step="1800">
               </div>
 
-              <h4 class="text-light">Precio Total: ${{ precioTotal }}</h4> <!-- Mostrar el precio actualizado -->
+              <!-- Mostrar precio total -->
+              <h4 class="text-light">Precio Total: ${{ precioTotal }}</h4>
 
+              <!-- Botón de confirmar -->
               <button type="submit" class="btn btn-light w-100">Confirmar</button>
             </form>
           </div>

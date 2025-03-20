@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetalleServicioPage implements OnInit {
   servicio: any = {
     nombre: '',
-    descripcion: '',
+    descripcion: '',    
     imagen: '',
     precio: 0,
     contenido: [],
@@ -54,11 +54,12 @@ export class DetalleServicioPage implements OnInit {
       // Asignar los precios y contenido según el tipo de servicio
       switch (this.servicio.nombre) {
         case 'Paquete de Bodas':
-          this.servicio.precio = 2500;
+          this.servicio.precio = 10000;
           this.servicio.contenido = [
-            'Sesión fotográfica profesional',
-            '50 fotos de alta calidad',
-            '1 hora de sesión'
+            'Cobertura completa del evento',
+            'Entrega digital en alta calidad',
+            'Fotografia natural y artistica',
+            'Edicion profesional',
           ];
           this.servicio.video = 'https://fb.watch/xOdxl6Debf/';
           break;
