@@ -102,13 +102,13 @@ export class NuevaPaginaPage implements OnInit {
     // Costos adicionales específicos por tipo de servicio
     switch (this.tipoServicio) {
       case 'Paquete de Bodas':
-        if (this.formulario.camarografoExtra) costoExtra += 800; // Camarógrafo extra
+        if (this.formulario.camarografoExtra) costoExtra += 1500; // Camarógrafo extra
         if (this.formulario.drone) costoExtra += 1200; // Drone
-        if (this.formulario.albumPremium) costoExtra += 600; // Álbum premium
+        if (this.formulario.albumPremium) costoExtra += 900; // Álbum premium
         break;
       case 'Paquete de XV Años':
-        if (this.formulario.maquillaje) costoExtra += 500; // Maquillaje
-        if (this.formulario.videoCoreografia) costoExtra += 1000; // Video de coreografía
+        if (this.formulario.maquillaje) costoExtra += 1000; // fotos previas
+        if (this.formulario.videoCoreografia) costoExtra += 2500; // cobertura de vals
         break;
       case 'Paquete BabyShower':
         if (this.formulario.decoracionExtra) costoExtra += 400; // Decoración extra

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Añadimos OnInit
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AuthService } from 'src/app/services/AuthService'; // Importamos AuthService
 
 @Component({
   selector: 'app-tab3',
@@ -7,45 +8,47 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   styleUrls: ['tab3.page.scss'],
   standalone: false,
 })
-export class Tab3Page {
-  profileImage: string = 'assets/images/xd.jpeg'; // Imagen de perfil por defecto
-  isEditing: boolean = false; // Controla el modo edición
+export class Tab3Page implements OnInit { // Implementamos OnInit
+  profileImage: string = 'assets/images/perfillll.jpg';
+  isEditing: boolean = false;
 
-  // Datos del usuario
   userData = {
-    name: 'Adan JC',
-    email: 'adandejesus20324gmail.com',
-    phone: '+52 271 291 70 11'
+    name: '',
+    email: '',
+    phone: '' // Dejamos el teléfono estático
   };
 
-  constructor() {}
+  constructor(private authService: AuthService) {} // Inyectamos AuthService
 
-  // Método para cambiar la foto de perfil
+  async ngOnInit() {
+    // Obtenemos el nombre y el correo del usuario desde AuthService
+    this.userData.name = (await this.authService.getUserName()) || 'Usuario';
+    this.userData.email = (await this.authService.getUserEmail()) || 'correo@ejemplo.com';
+  }
+
   async changeProfilePicture() {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
         allowEditing: true,
         resultType: CameraResultType.DataUrl,
-        source: CameraSource.Photos, // Abre la galería
+        source: CameraSource.Photos,
       });
 
       if (image?.dataUrl) {
-        this.profileImage = image.dataUrl; // Cambia la imagen en la vista
+        this.profileImage = image.dataUrl;
       }
     } catch (error) {
       console.error('Error al seleccionar la imagen', error);
     }
   }
 
-  // Activar o desactivar modo edición
   toggleEdit() {
     this.isEditing = !this.isEditing;
   }
 
-  // Guardar los cambios
   saveChanges() {
-    this.isEditing = false; // Salir del modo edición
+    this.isEditing = false;
     console.log('Datos guardados:', this.userData);
   }
 }

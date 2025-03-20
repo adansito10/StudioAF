@@ -9,6 +9,9 @@
   </ion-toolbar>
 </ion-header>
 
+
+
+
 <ion-content class="bg-dark text-white">
   <div class="container mt-4">
     <div class="row justify-content-center">
@@ -30,7 +33,7 @@
                   <input type="checkbox" [(ngModel)]="formulario.drone" name="drone" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Álbum Premium ($600):</label>
+                  <label class="form-label">Set de fotos giratorio ($900):</label>
                   <input type="checkbox" [(ngModel)]="formulario.albumPremium" name="albumPremium" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
               </div>
@@ -38,11 +41,11 @@
               <!-- Campos específicos para Paquete de XV Años -->
               <div *ngIf="tipoServicio === 'Paquete de XV Años'">
                 <div class="mb-3">
-                  <label class="form-label">Maquillaje ($500):</label>
+                  <label class="form-label">Sesion de fotos ($1000):</label>
                   <input type="checkbox" [(ngModel)]="formulario.maquillaje" name="maquillaje" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Video de Coreografía ($1000):</label>
+                  <label class="form-label">Video de cobertura de vals ($2500):</label>
                   <input type="checkbox" [(ngModel)]="formulario.videoCoreografia" name="videoCoreografia" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
               </div>
@@ -69,6 +72,10 @@
                   <label class="form-label">Marco de Fotos ($200):</label>
                   <input type="checkbox" [(ngModel)]="formulario.marcoFotos" name="marcoFotos" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
+              </div>
+
+              <div>
+                <h5>Reserva tu sesion ahora</h5>
               </div>
 
               <!-- Campos comunes: Fecha y Hora -->

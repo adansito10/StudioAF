@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular'; // Importa LoadingController
+import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/AuthService';
 
 @Component({
@@ -18,7 +18,7 @@ export class RegistroPage {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private loadingController: LoadingController // Inyecta LoadingController
+    private loadingController: LoadingController
   ) {
     console.log('Constructor de RegistroPage ejecutado');
   }
@@ -33,7 +33,6 @@ export class RegistroPage {
       return;
     }
 
-    // Crea y muestra el spinner
     const loading = await this.loadingController.create({
       message: 'Registrando usuario...',
       spinner: 'crescent',
@@ -43,11 +42,18 @@ export class RegistroPage {
     try {
       console.log('Enviando registro:', { nombre: this.nombre, correo: this.correo, contrasena: this.contrasena });
       await this.authService.register(this.nombre, this.correo, this.contrasena).toPromise();
-      await loading.dismiss(); 
-      this.router.navigate(['/tabs/tab1']);
+
+      // Iniciar sesión automáticamente después del registro
+      const token = await this.authService.login(this.correo, this.contrasena).toPromise();
+      if (token) {
+        console.log('Inicio de sesión automático exitoso, token:', token);
+      }
+
+      await loading.dismiss();
+      this.router.navigate(['/tabs/tab1']); // Redirige directamente al menú
     } catch (error) {
       console.error('Error en registro:', error);
-      await loading.dismiss(); 
+      await loading.dismiss();
       alert('Error al registrar usuario: ' + ((error as any).error?.error || 'Error desconocido'));
     }
   }

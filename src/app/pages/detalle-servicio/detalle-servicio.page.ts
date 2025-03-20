@@ -64,11 +64,11 @@ export class DetalleServicioPage implements OnInit {
           this.servicio.video = 'https://fb.watch/xOdxl6Debf/';
           break;
         case 'Paquete de XV Años':
-          this.servicio.precio = 2000;
+          this.servicio.precio = 15000;
           this.servicio.contenido = [
-            'Sesión con cambio de vestuario',
-            '40 fotos editadas',
-            '1 video resumen'
+            'Cobertura completa del evento',
+            'Sesion formal con la quinceañera',
+            'Fotografia de familia y amigos',
           ];
           this.servicio.video = 'assets/videos/paquete-xv.mp4';
           break;
