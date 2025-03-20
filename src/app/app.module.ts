@@ -9,10 +9,10 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/AuthService';
 import { IonicStorageModule } from '@ionic/storage-angular';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, MenuComponent, ImageModalComponent, ],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy,  }],
   bootstrap: [AppComponent],
 })

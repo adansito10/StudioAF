@@ -7,20 +7,40 @@
 
   <!-- Caja del formulario -->
   <div class="login-box">
-    <ion-item class="input-field">
-      <ion-icon name="person" slot="start"></ion-icon>
-      <ion-input [(ngModel)]="correo" placeholder="Correo electrónico"></ion-input>
-    </ion-item>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <!-- Correo -->
+      <ion-item class="input-field" [class.valid]="isValid('correo')" [class.invalid]="correoControl.touched && correoControl.invalid">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-input type="email" formControlName="correo" placeholder="Correo electrónico" maxlength="30"></ion-input>
+        <ion-icon *ngIf="isValid('correo')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
+        <ion-icon *ngIf="correoControl.touched && correoControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
+      </ion-item>
+      <div class="validation-message" *ngIf="correoControl.touched">
+        <small *ngIf="hasError('correo', 'required')" class="text-danger">Por favor, ingresa un correo.</small>
+        <small *ngIf="hasError('correo', 'pattern')" class="text-danger">Por favor, ingresa un correo válido.</small>
+        <small *ngIf="hasError('correo', 'maxlength')" class="text-danger">El correo no puede tener más de 30 caracteres.</small>
+        <small *ngIf="isValid('correo')" class="text-success"></small>
+      </div>
 
-    <ion-item class="input-field">
-      <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-input type="password" [(ngModel)]="contrasena" placeholder="Contraseña"></ion-input>
-    </ion-item>
+      <!-- Contraseña -->
+      <ion-item class="input-field" [class.valid]="isValid('contrasena')" [class.invalid]="contrasenaControl.touched && contrasenaControl.invalid">
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+        <ion-input type="password" formControlName="contrasena" placeholder="Contraseña"></ion-input>
+        <ion-icon *ngIf="isValid('contrasena')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
+        <ion-icon *ngIf="contrasenaControl.touched && contrasenaControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
+      </ion-item>
+      <div class="validation-message" *ngIf="contrasenaControl.touched">
+        <small *ngIf="hasError('contrasena', 'required')" class="text-danger">Por favor, ingresa una contraseña.</small>
+        <small *ngIf="isValid('contrasena')" class="text-success"></small>
+      </div>
 
-    <ion-button expand="full" class="login-button" (click)="onLogin()">Iniciar sesión</ion-button>
+      <ion-button expand="full" class="login-button" type="submit" [disabled]="loginForm.invalid || isSubmitting">
+        Iniciar sesión
+      </ion-button>
 
-    <p class="signup-text">
-      ¿No tienes una cuenta? <a routerLink="/registro" class="signup-link">Regístrate aquí →</a>
-    </p>
+      <p class="signup-text">
+        ¿No tienes una cuenta? <a routerLink="/registro" class="signup-link">Regístrate aquí →</a>
+      </p>
+    </form>
   </div>
 </ion-content>

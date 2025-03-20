@@ -1,33 +1,70 @@
 <ion-content class="login-container">
-  <!-- Título "Registro" -->
   <h2 class="register-title">Registro</h2>
 
-  <!-- Caja del formulario -->
   <div class="login-box">
-    <ion-item class="input-field">
-      <ion-icon name="person" slot="start"></ion-icon>
-      <ion-input [(ngModel)]="nombre" placeholder="Nombre completo"></ion-input>
-    </ion-item>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <!-- Nombre -->
+      <ion-item class="input-field" [class.valid]="isValid('nombre')" [class.invalid]="nombreControl.touched && nombreControl.invalid">
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-input formControlName="nombre" placeholder="Nombre completo" maxlength="15"></ion-input>
+        <ion-icon *ngIf="isValid('nombre')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
+        <ion-icon *ngIf="nombreControl.touched && nombreControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
+      </ion-item>
+      <div class="validation-message" *ngIf="nombreControl.touched">
+        <small *ngIf="hasError('nombre', 'required')" class="text-danger">Por favor, ingresa un nombre.</small>
+        <small *ngIf="hasError('nombre', 'maxlength')" class="text-danger">El nombre no puede tener más de 15 caracteres.</small>
+        <small *ngIf="hasError('nombre', 'pattern')" class="text-danger">El nombre solo puede contener letras y espacios.</small>
+        <small *ngIf="isValid('nombre')" class="text-success"></small>
+      </div>
 
-    <ion-item class="input-field">
-      <ion-icon name="mail" slot="start"></ion-icon>
-      <ion-input type="email" [(ngModel)]="correo" placeholder="Correo electrónico"></ion-input>
-    </ion-item>
+      <!-- Correo -->
+      <ion-item class="input-field" [class.valid]="isValid('correo')" [class.invalid]="correoControl.touched && correoControl.invalid">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-input type="email" formControlName="correo" placeholder="Correo electrónico" maxlength="30"></ion-input>
+        <ion-icon *ngIf="isValid('correo')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
+        <ion-icon *ngIf="correoControl.touched && correoControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
+      </ion-item>
+      <div class="validation-message" *ngIf="correoControl.touched">
+        <small *ngIf="hasError('correo', 'required')" class="text-danger">Por favor, ingresa un correo.</small>
+        <small *ngIf="hasError('correo', 'pattern')" class="text-danger">Por favor, ingresa un correo válido.</small>
+        <small *ngIf="hasError('correo', 'maxlength')" class="text-danger">El correo no puede tener más de 30 caracteres.</small>
+        <small *ngIf="isValid('correo')" class="text-success"></small>
+      </div>
 
-    <ion-item class="input-field">
-      <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-input type="password" [(ngModel)]="contrasena" placeholder="Contraseña"></ion-input>
-    </ion-item>
+      <!-- Contraseña -->
+      <ion-item class="input-field" [class.valid]="isValid('contrasena')" [class.invalid]="contrasenaControl.touched && contrasenaControl.invalid">
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+        <ion-input type="password" formControlName="contrasena" placeholder="Contraseña" maxlength="12"></ion-input>
+        <ion-icon *ngIf="isValid('contrasena')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
+        <ion-icon *ngIf="contrasenaControl.touched && contrasenaControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
+      </ion-item>
+      <div class="validation-message" *ngIf="contrasenaControl.touched">
+        <small *ngIf="hasError('contrasena', 'required')" class="text-danger">Por favor, ingresa una contraseña.</small>
+        <small *ngIf="hasError('contrasena', 'pattern')" class="text-danger">La contraseña debe tener al menos una mayúscula y un número.</small>
+        <small *ngIf="hasError('contrasena', 'maxlength')" class="text-danger">La contraseña no puede tener más de 12 caracteres.</small>
+        <small *ngIf="isValid('contrasena')" class="text-success"></small>
+      </div>
 
-    <ion-item class="input-field">
-      <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-input type="password" [(ngModel)]="confirmarContrasena" placeholder="Confirmar contraseña"></ion-input>
-    </ion-item>
+      <!-- Confirmar Contraseña -->
+      <ion-item class="input-field" [class.valid]="isConfirmPasswordValid()" [class.invalid]="confirmarContrasenaControl.touched && (confirmarContrasenaControl.invalid || hasMismatchError())">
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+        <ion-input type="password" formControlName="confirmarContrasena" placeholder="Confirmar contraseña" maxlength="12"></ion-input>
+        <ion-icon *ngIf="isConfirmPasswordValid()" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
+        <ion-icon *ngIf="confirmarContrasenaControl.touched && (confirmarContrasenaControl.invalid || hasMismatchError())" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
+      </ion-item>
+      <div class="validation-message" *ngIf="confirmarContrasenaControl.touched">
+        <small *ngIf="hasError('confirmarContrasena', 'required')" class="text-danger">Por favor, confirma la contraseña.</small>
+        <small *ngIf="hasMismatchError() && !hasError('confirmarContrasena', 'required')" class="text-danger">Las contraseñas no coinciden.</small>
+        <small *ngIf="isConfirmPasswordValid()" class="text-success"></small>
+      </div>
 
-    <ion-button expand="full" class="login-button" (click)="onRegister()">Registrarse</ion-button>
+      <ion-button expand="full" class="login-button" type="submit" [disabled]="registerForm.invalid || isSubmitting">
+        Registrarse
+      </ion-button>
 
-    <p class="signup-text">
-      ¿Ya tienes una cuenta? <a routerLink="/login" class="signup-link">Inicia sesión aquí →</a>
-    </p>
+      <p class="signup-text">
+        ¿Ya tienes una cuenta? <a routerLink="/login" class="signup-link">Inicia sesión aquí →</a>
+      </p>
+    </form>
   </div>
 </ion-content>
