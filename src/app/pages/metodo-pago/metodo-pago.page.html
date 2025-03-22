@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h3 class="bienvenida">Elije metodo de pago</h3>
+  <h3 class="bienvenida">Elige método de pago</h3>
 
   <!-- Opciones de pago (tarjetas) -->
   <div class="payment-options">
@@ -22,7 +22,7 @@
       <ion-card-content>
         <ion-row>
           <ion-col size="8">
-            <p>Tarjeta de credito</p> <!-- Solo para mostrar como ejemplo -->
+            <p class="texto-blanco">Tarjeta de crédito</p>
           </ion-col>
           <ion-col size="4" class="ion-text-right">
             <ion-img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" style="width: 50px;"></ion-img>
@@ -39,7 +39,7 @@
       <ion-card-content>
         <ion-row>
           <ion-col size="8">
-            <p>OXXO</p> <!-- Solo para mostrar como ejemplo -->
+            <p class="texto-blanco">PayPal</p>
           </ion-col>
           <ion-col size="4" class="ion-text-right">
             <ion-img src="https://i0.wp.com/kpenko.com/wp-content/uploads/2019/09/Logo-paypal-01-1024x315.png?ssl=1" style="width: 50px;"></ion-img>
@@ -56,10 +56,10 @@
       <ion-card-content>
         <ion-row>
           <ion-col size="8">
-            <p>PayPal</p>
-          </ion-col> 
+            <p class="texto-blanco">OXXO</p>
+          </ion-col>
           <ion-col size="4" class="ion-text-right">
-            <ion-img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Oxxo_Logo.svg/480px-Oxxo_Logo.svg.png" style="width: 50px;"></ion-img>
+            <ion-img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Oxxo_Logo.svg/480px-Oxxo_Logo.svg.png" style="width: 50px;"></ion-img>
           </ion-col>
         </ion-row>
       </ion-card-content>
@@ -67,7 +67,7 @@
   </div>
 
   <!-- Formulario dinámico al seleccionar un método -->
-  <div *ngIf="selectedMethod === 'tarjetaCredito' || selectedMethod === 'tarjetaDebito'">
+  <div *ngIf="selectedMethod === 'tarjetaCredito'">
     <ion-item>
       <ion-label position="stacked">Nombre en la Tarjeta</ion-label>
       <ion-input
@@ -121,5 +121,17 @@
     </ion-item>
   </div>
 
-  <ion-button expand="full" (click)="submitPayment()" class="custom-confirm-button">Confirmar Pago</ion-button>
+  <!-- Contenedor para el botón de PayPal, siempre presente pero oculto -->
+  <div [hidden]="selectedMethod !== 'tarjetaDebito'" id="paypal-button-container" class="ion-padding">
+    <!-- El botón de PayPal se renderizará aquí -->
+  </div>
+
+  <!-- Botón de confirmar solo para tarjeta de crédito y OXXO -->
+  <ion-button
+    *ngIf="selectedMethod === 'tarjetaCredito' || selectedMethod === 'oxxo'"
+    expand="full"
+    (click)="submitPayment()"
+    class="custom-confirm-button">
+    Confirmar Pago
+  </ion-button>
 </ion-content>

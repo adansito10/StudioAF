@@ -89,8 +89,24 @@ export class DetalleServicioPage implements OnInit {
               '30 fotos de alta calidad',
               'Foto retrato'
             ];
+
+            
             this.servicio.video = 'assets/videos/paquete-infantil.mp4';
             break;
+
+
+
+            case 'Paquete Bautizo':
+              this.servicio.precio = 1500;
+              this.servicio.contenido = [
+                'Cobertura completa del evento',
+                'Fotografias familiares y padrinos',
+                'Foto retrato'
+              ];
+  
+              
+              this.servicio.video = 'assets/videos/paquete-infantil.mp4';
+              break;
         default:
           this.servicio.precio = 0;
           this.servicio.contenido = ['Información no disponible'];
