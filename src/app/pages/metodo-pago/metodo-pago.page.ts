@@ -145,7 +145,7 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
               console.log('Pago completado:', details);
               alert(`¡Pago exitoso con PayPal! ID de transacción: ${details.id}`);
               this.generatePaymentReceipt();
-              this.router.navigate(['/']);
+              this.router.navigate(['/tabs/tab1']);
             });
           },
           onError: (err: any) => {

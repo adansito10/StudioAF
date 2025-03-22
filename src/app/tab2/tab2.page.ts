@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { Servicio, ServiciosService } from 'src/services/servicios.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,43 +7,31 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
-export class Tab2Page {
-  servicios: any[] = [
-    {
-      titulo: 'Paquete de Bodas',
-      descripcion: 'Explora nuestro paquete de bodas que tenemos para ti.',
-      imagen: 'assets/images/boda4.jpg',
-      video: 'assets/videos/paquete-bodas.mp4' 
-    },
-    {
-      titulo: 'Paquete de XV Años',
-      descripcion: 'Haz que tus quinceaños quede marcado para siempre.',
-      imagen: 'assets/images/quinceaños2.jpg',
-      video: 'assets/videos/paquete-xv.mp4' 
-    },
-    {
-      titulo: 'Paquete BabyShower',
-      descripcion: 'Recuerda el genero de tu bebe con nuestas fotos.',
-      imagen: 'assets/images/baby1.jpg',
-      video: 'assets/videos/paquete-infantil.mp4' 
-    },
-    {
-      titulo: 'Paquete Familiar',
-      descripcion: 'Reune a tu familia y enmarca el momento con nuestras fotos.',
-      imagen: 'assets/images/familiar1.jpg',
-      video: 'assets/videos/paquete-infantil.mp4' // URL del video
-    },
-    {
-      titulo: 'Paquete Bautizo',
-      descripcion: 'Recuerda el bautizo de tu hijo con nuetro paquete de fotos.',
-      imagen: 'assets/images/bautizo1.jpg',
-      video: 'assets/videos/paquete-infantil.mp4' // URL del video
-    }
-  ];
+export class Tab2Page implements OnInit {
+  servicios: any[] = []; // Array para los servicios mapeados
 
+  constructor(private serviciosService: ServiciosService) {}
 
-  
-  constructor() { }
+  ngOnInit() {
+    this.cargarServicios();
+  }
 
-  ngOnInit() {}
+  cargarServicios() {
+    this.serviciosService.getServicios().subscribe({
+      next: (response: any) => {
+        // Mapeamos los datos de la API al formato que espera el HTML
+        this.servicios = response.servicios.map((servicio: Servicio) => ({
+          titulo: servicio.nombre_servicio,
+          descripcion: servicio.descripcion,
+          imagen: servicio.imagen,
+          video: servicio.video
+        }));
+        console.log('Servicios cargados desde la API:', this.servicios);
+      },
+      error: (error) => {
+        console.error('Error al cargar servicios:', error);
+        // No asignamos datos locales, dejamos el array vacío en caso de error
+      }
+    });
+  }
 }
