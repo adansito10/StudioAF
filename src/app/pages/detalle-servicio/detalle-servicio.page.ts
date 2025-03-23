@@ -73,21 +73,25 @@ export class DetalleServicioPage implements OnInit {
           this.servicio.video = 'assets/videos/paquete-xv.mp4';
           break;
         case 'Paquete BabyShower':
-          this.servicio.precio = 1800;
+          this.servicio.precio = 5000;
           this.servicio.contenido = [
-            'Fotografías temáticas',
-            '30 fotos de alta calidad',
-            'Mini álbum impreso'
+            'Cobertura completa',
+            'Entrega digital en alta calidad',
+            'Fotografias familiares y amigos',
+            'Edicion profesional',
+
+            
           ];
           this.servicio.video = 'assets/videos/paquete-infantil.mp4';
           break;
 
 
           case 'Paquete Familiar':
-            this.servicio.precio = 1500;
+            this.servicio.precio = 6000;
             this.servicio.contenido = [
-              '30 fotos de alta calidad',
-              'Foto retrato'
+              'Sesion fotografica en locacion elegida',
+              'entrega en digital en alta calidad',
+              'Fotografias en grupal o inviduales',
             ];
 
             
@@ -97,11 +101,11 @@ export class DetalleServicioPage implements OnInit {
 
 
             case 'Paquete Bautizo':
-              this.servicio.precio = 1500;
+              this.servicio.precio = 6000;
               this.servicio.contenido = [
                 'Cobertura completa del evento',
                 'Fotografias familiares y padrinos',
-                'Foto retrato'
+                '100 fotografias de alta calidad',
               ];
   
               

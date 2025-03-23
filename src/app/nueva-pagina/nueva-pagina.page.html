@@ -9,9 +9,6 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-
 <ion-content class="bg-dark text-white">
   <div class="container mt-4">
     <div class="row justify-content-center">
@@ -19,9 +16,6 @@
         <div class="card shadow-sm bg-dark text-white border-light">
           <div class="card-body">
             <form (ngSubmit)="enviarFormulario()">
-              <!-- Campo común: Horas Extras -->
-             
-
               <!-- Campos específicos para Paquete de Bodas -->
               <div *ngIf="tipoServicio === 'Paquete de Bodas'">
                 <div class="mb-3">
@@ -41,7 +35,7 @@
               <!-- Campos específicos para Paquete de XV Años -->
               <div *ngIf="tipoServicio === 'Paquete de XV Años'">
                 <div class="mb-3">
-                  <label class="form-label">Sesion de fotos ($1000):</label>
+                  <label class="form-label">Sesión de fotos ($1000):</label>
                   <input type="checkbox" [(ngModel)]="formulario.maquillaje" name="maquillaje" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
                 <div class="mb-3">
@@ -74,14 +68,35 @@
                 </div>
               </div>
 
+
+              <div *ngIf="tipoServicio === 'Paquete Bautizo'">
+                <div class="mb-3">
+                  <label class="form-label">Video recuerdo ($1500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.videoretrato" name="videoretrato" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Marco de fotos ($800):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.marcoFotos" name="marcoFotos" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Albume de fotos ($1500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.albumedefotos" name="marcodefotos" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                
+              </div>
+
               <div>
-                <h5>Reserva tu sesion ahora</h5>
+                <h5>Reserva tu sesión ahora</h5>
               </div>
 
               <!-- Campos comunes: Fecha y Hora -->
               <div class="mb-3">
                 <label class="form-label">Fecha:</label>
-                <input type="date" [(ngModel)]="formulario.fecha" name="fecha" class="form-control">
+                <input type="date" [(ngModel)]="formulario.fecha" name="fecha" class="form-control" (change)="validarFecha()">
+                <ion-text color="danger" *ngIf="fechaInvalida">
+                  <small>La fecha no puede ser anterior a hoy.</small>
+                </ion-text>
               </div>
               <div class="mb-3">
                 <label class="form-label">Hora:</label>
@@ -92,7 +107,9 @@
               <h4 class="text-light">Precio Total: ${{ precioTotal }}</h4>
 
               <!-- Botón de confirmar -->
-              <button type="submit" class="btn btn-light w-100">Confirmar</button>
+              <button type="submit" class="btn btn-light w-100" [disabled]="fechaInvalida || !formulario.fecha || !formulario.hora">
+                Confirmar
+              </button>
             </form>
           </div>
         </div>

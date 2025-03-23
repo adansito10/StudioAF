@@ -89,11 +89,11 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
       console.log('Pago con tarjeta de crédito:', this.formData);
       await this.generatePaymentReceipt();
       alert(`Pago realizado con éxito. Total: $${this.paqueteSeleccionado.precio}`);
-      this.router.navigate(['/']);
+      this.router.navigate(['/tabs/tab1']);
     } else if (this.selectedMethod === 'oxxo') {
       await this.generatePdfWithQRCode();
       alert(`Instrucciones de pago en OXXO generadas. Total: $${this.paqueteSeleccionado.precio}`);
-      this.router.navigate(['/']);
+      this.router.navigate(['/tabs/tab1']);
     }
   }
 
