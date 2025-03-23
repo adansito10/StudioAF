@@ -1,6 +1,16 @@
 <ion-content class="modal-content">
   <ion-button fill="clear" class="close-btn" (click)="close()">✖</ion-button>
-  <div class="image-container">
-    <ion-img [src]="image" class="full-image"></ion-img>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let img of images">
+        <div class="swiper-zoom-container">
+          <img [src]="img" class="full-image" alt="Imagen en carrusel">
+        </div>
+      </div>
+    </div>
+    <!-- Paginación -->
+    <div class="swiper-pagination"></div>
+    <!-- Botones de navegación -->
+
   </div>
 </ion-content>

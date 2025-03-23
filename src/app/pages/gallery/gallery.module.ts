@@ -13,7 +13,7 @@ import { GalleryPage } from './gallery.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    GalleryPageRoutingModule
+    GalleryPageRoutingModule, 
   ],
   declarations: [GalleryPage]
 })
