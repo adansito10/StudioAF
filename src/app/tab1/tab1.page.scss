@@ -412,6 +412,23 @@ ion-content {
 
 
 
+  // Estilos para el menú
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Ocupa todo el alto disponible
+  padding: 0;
+}
+
+.menu-items-top {
+  flex: 0 0 auto; // No crece ni se encoge, solo ocupa el espacio necesario
+}
+
+.menu-list ion-item:last-child {
+  margin-top: auto; // Empuja el último elemento (Cerrar sesión) hacia abajo
+}
+
+
 
 
 
@@ -429,4 +446,16 @@ ion-content {
 
 
   
+
+
+
+// Estilos para el menú
+
+
+
+
+
+ion-menu ion-list {
+  background: transparent; // Aseguramos que el ion-list no tenga fondo
+}
 
