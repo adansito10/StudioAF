@@ -31,7 +31,7 @@
       </p>
 
       <!-- Botones de acción -->
-      <button *ngIf="!isEditing" class="btn btn-primary w-100 mt-4 shadow" (click)="toggleEdit()">Editar</button>
+      <button *ngIf="!isEditing" class="btn btn-edit w-100 mt-4 shadow" (click)="toggleEdit()">Editar</button>
       <div *ngIf="isEditing">
           <button class="btn btn-success w-100 mt-2 shadow" (click)="saveChanges()">Guardar</button>
           <button class="btn btn-danger w-100 mt-2 shadow" (click)="toggleEdit()">Cancelar</button>
