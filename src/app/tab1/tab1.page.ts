@@ -31,7 +31,21 @@ export class Tab1Page implements OnInit {
         {
             title: 'Bodas',
             cover: 'assets/images/boda1.jpg',
-            gallery: ['assets/images/boda1.jpg',  'assets/images/boda3.jpg', 'assets/images/boda10.jpg',  'assets/images/boda11.jpg', 'assets/images/boda12.jpg',   'assets/images/boda14.jpg', 'assets/images/boda15.jpg',  'assets/images/boda17.jpg', 'assets/images/boda19.jpg', 'assets/images/boda20.jpg', 'assets/images/boda21.jpg', 'assets/images/boda22.jpg', 'assets/images/boda23.jpg',],
+            gallery: [
+                'assets/images/boda1.jpg',
+                'assets/images/boda3.jpg',
+                'assets/images/boda10.jpg',
+                'assets/images/boda11.jpg',
+                'assets/images/boda12.jpg',
+                'assets/images/boda14.jpg',
+                'assets/images/boda15.jpg',
+                'assets/images/boda17.jpg',
+                'assets/images/boda19.jpg',
+                'assets/images/boda20.jpg',
+                'assets/images/boda21.jpg',
+                'assets/images/boda22.jpg',
+                'assets/images/boda23.jpg',
+            ],
         },
         {
             title: 'XV AÑOS',
@@ -40,7 +54,8 @@ export class Tab1Page implements OnInit {
                 'assets/images/quinceaños1.jpg',
                 'assets/images/quinceaños2.jpg',
                 'assets/images/quinceaños3.jpg',
-                'assets/images/quince11.jpg',                'assets/images/quince10.jpg',
+                'assets/images/quince11.jpg',
+                'assets/images/quince10.jpg',
                 'assets/images/quince12.jpg',
                 'assets/images/quince13.jpg',
                 'assets/images/quince14.jpg',
@@ -50,22 +65,29 @@ export class Tab1Page implements OnInit {
                 'assets/images/quince18.jpg',
                 'assets/images/quince19.jpg',
                 'assets/images/quince20.jpg',
-
-
-
-
-
             ],
         },
         {
             title: 'Bautizos',
             cover: 'assets/images/bautizo1.jpg',
-            gallery: ['assets/images/bautizo1.jpg','assets/images/bautizo6.jpg','assets/images/bautizo7.jpg','assets/images/bautizo9.jpg',],
+            gallery: [
+                'assets/images/bautizo1.jpg',
+                'assets/images/bautizo6.jpg',
+                'assets/images/bautizo7.jpg',
+                'assets/images/bautizo9.jpg',
+            ],
         },
         {
             title: 'Baby Shower',
             cover: 'assets/images/baby11.jpg',
-            gallery: ['assets/images/baby2.jpg', 'assets/images/baby1.jpg','assets/images/baby13.jpg','assets/images/baby12.jpg','assets/images/baby14.jpg','assets/images/baby15.jpg',],
+            gallery: [
+                'assets/images/baby2.jpg',
+                'assets/images/baby1.jpg',
+                'assets/images/baby13.jpg',
+                'assets/images/baby12.jpg',
+                'assets/images/baby14.jpg',
+                'assets/images/baby15.jpg',
+            ],
         },
     ];
 
@@ -74,22 +96,25 @@ export class Tab1Page implements OnInit {
     constructor(
         private navCtrl: NavController,
         private authService: AuthService,
-        private alertController: AlertController, // Para mostrar la notificación
-        private toastController: ToastController // Para mostrar mensajes
+        private alertController: AlertController,
+        private toastController: ToastController
     ) {}
 
     async ngOnInit() {
         this.userName = await this.authService.getUserName();
         console.log('Nombre del usuario:', this.userName);
-    }
 
-    
+        // Asegurarse de que el video esté silenciado
+        const video = document.getElementById('promo-video') as HTMLVideoElement;
+        if (video) {
+            video.muted = true; // Forzar el silenciamiento
+        }
+    }
 
     openGallery(game: any) {
         this.navCtrl.navigateForward(['/gallery', { images: JSON.stringify(game.gallery), title: game.title }]);
     }
 
-    // Nueva función para confirmar el cierre de sesión
     async confirmLogout() {
         const alert = await this.alertController.create({
             header: 'Cerrar sesión',
@@ -106,11 +131,8 @@ export class Tab1Page implements OnInit {
                     text: 'Sí',
                     handler: async () => {
                         try {
-                            // Cerrar sesión
                             await this.authService.logout();
-                            // Redirigir a la página de login
                             this.navCtrl.navigateRoot('/login');
-                            // Mostrar mensaje de éxito
                             this.presentToast('Sesión cerrada exitosamente', 'success');
                         } catch (error) {
                             console.error('Error al cerrar sesión:', error);
@@ -124,7 +146,6 @@ export class Tab1Page implements OnInit {
         await alert.present();
     }
 
-    // Función para mostrar mensajes toast
     async presentToast(message: string, color: string) {
         const toast = await this.toastController.create({
             message,
@@ -134,5 +155,8 @@ export class Tab1Page implements OnInit {
         });
         await toast.present();
     }
-    
 }
+
+
+
+//

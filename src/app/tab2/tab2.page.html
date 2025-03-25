@@ -2,21 +2,25 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
       </ion-buttons>
       <ion-title>Servicios</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content class="ion-padding">
-    <div *ngFor="let servicio of servicios" class="card text-white bg-dark border-0 rounded-4">
-      <img [src]="servicio.imagen" class="card-img-top rounded-top-4 img-small" [alt]="servicio.titulo">
-      <div class="card-body">
-        <h5 class="card-title fw-bold">{{ servicio.titulo }}</h5>
-        <p class="card-text">{{ servicio.descripcion }}</p>
-        <a routerLink="/detalle-servicio" [queryParams]="{ nombre: servicio.titulo, descripcion: servicio.descripcion, imagen: servicio.imagen, video: servicio.video }" class="btn btn-light text-dark d-flex align-items-center gap-2">
-          <ion-icon name="open-outline"></ion-icon>
-          Ver más detalles
-        </a>
+    <div *ngFor="let servicio of servicios" class="card text-white border-0 rounded-4">
+      <div class="card-image-wrapper">
+        <img [src]="servicio.imagen" class="card-img-top rounded-top-4 img-small" [alt]="servicio.titulo">
+        <div class="image-overlay"></div>
+        <div class="card-content-overlay">
+          <h5 class="card-title fw-bold">{{ servicio.titulo }}</h5>
+          <p class="card-text">{{ servicio.descripcion }}</p>
+          <a routerLink="/detalle-servicio" [queryParams]="{ nombre: servicio.titulo, descripcion: servicio.descripcion, imagen: servicio.imagen, video: servicio.video }" class="btn btn-custom d-flex align-items-center gap-2">
+            <ion-icon name="open-outline" slot="start"></ion-icon>
+            Ver más detalles
+          </a>
+        </div>
       </div>
     </div>
   </ion-content>
