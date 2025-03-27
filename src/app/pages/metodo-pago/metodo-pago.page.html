@@ -1,3 +1,6 @@
+
+
+
 <ion-header>
   <ion-toolbar class="bg-dark">
     <ion-buttons slot="start">
@@ -68,59 +71,89 @@
 
   <!-- Formulario dinámico al seleccionar un método -->
   <div *ngIf="selectedMethod === 'tarjetaCredito'">
-    <ion-item>
-      <ion-label position="stacked">Nombre en la Tarjeta</ion-label>
-      <ion-input
-        [(ngModel)]="formData.nombreTarjeta"
-        placeholder="Ingrese el nombre del titular"
-        class="custom-input">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Número de Tarjeta</ion-label>
-      <ion-input
-        [(ngModel)]="formData.numeroTarjeta"
-        placeholder="1234 5678 9012 3456"
-        class="custom-input">
-      </ion-input>
-    </ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Mes Expiración</ion-label>
-            <ion-select
-              [(ngModel)]="formData.expiracionMes"
-              placeholder="MM"
-              class="custom-input">
-              <ion-select-option *ngFor="let month of months" [value]="month">{{ month }}</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Año Expiración</ion-label>
-            <ion-select
-              [(ngModel)]="formData.expiracionYear"
-              placeholder="YYYY"
-              class="custom-input">
-              <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-item>
-      <ion-label position="stacked">CVV</ion-label>
-      <ion-input
-        [(ngModel)]="formData.cvv"
-        type="password"
-        placeholder="Código de Seguridad"
-        class="custom-input">
-      </ion-input>
-    </ion-item>
+    <form [formGroup]="paymentForm">
+      <ion-item>
+        <ion-label position="stacked">Nombre en la Tarjeta</ion-label>
+        <ion-input
+          formControlName="nombreTarjeta"
+          placeholder="Ingrese el nombre del titular"
+          maxlength="50" 
+          class="custom-input">
+        </ion-input>
+        <ion-text color="danger" *ngIf="paymentForm.get('nombreTarjeta')?.touched && paymentForm.get('nombreTarjeta')?.invalid">
+          <small *ngIf="paymentForm.get('nombreTarjeta')?.errors?.['required']">El nombre es obligatorio.</small>
+          <small *ngIf="paymentForm.get('nombreTarjeta')?.errors?.['maxlength']">No puede exceder los 50 caracteres.</small>
+          <small *ngIf="paymentForm.get('nombreTarjeta')?.errors?.['pattern']">Solo se permiten letras y espacios.</small>
+        </ion-text>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Número de Tarjeta</ion-label>
+        <ion-input
+          formControlName="numeroTarjeta"
+          placeholder="1234 5678 9012 3456"
+          type="text"
+          inputmode="numeric" 
+          maxlength="16" 
+          class="custom-input">
+        </ion-input>
+        <ion-text color="danger" *ngIf="paymentForm.get('numeroTarjeta')?.touched && paymentForm.get('numeroTarjeta')?.invalid">
+          <small *ngIf="paymentForm.get('numeroTarjeta')?.errors?.['required']">El número de tarjeta es obligatorio.</small>
+          <small *ngIf="paymentForm.get('numeroTarjeta')?.errors?.['pattern']">Debe contener exactamente 16 dígitos numéricos.</small>
+        </ion-text>
+      </ion-item>
+  
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Mes Expiración</ion-label>
+              <ion-select
+                formControlName="expiracionMes"
+                placeholder="MM"
+                class="custom-input">
+                <ion-select-option *ngFor="let month of months" [value]="month">{{ month }}</ion-select-option>
+              </ion-select>
+              <ion-text color="danger" *ngIf="paymentForm.get('expiracionMes')?.touched && paymentForm.get('expiracionMes')?.invalid">
+                <small *ngIf="paymentForm.get('expiracionMes')?.errors?.['required']">El mes es obligatorio.</small>
+              </ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Año Expiración</ion-label>
+              <ion-select
+                formControlName="expiracionYear"
+                placeholder="YYYY"
+                class="custom-input">
+                <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
+              </ion-select>
+              <ion-text color="danger" *ngIf="paymentForm.get('expiracionYear')?.touched && paymentForm.get('expiracionYear')?.invalid">
+                <small *ngIf="paymentForm.get('expiracionYear')?.errors?.['required']">El año es obligatorio.</small>
+                <small *ngIf="paymentForm.get('expiracionYear')?.errors?.['invalidYear']">El año no puede ser anterior al actual.</small>
+              </ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-item>
+        <ion-label position="stacked">CVV</ion-label>
+        <ion-input
+          formControlName="cvv"
+          type="password"
+          placeholder="Código de Seguridad"
+          inputmode="numeric" 
+          maxlength="3"
+          class="custom-input">
+        </ion-input>
+        <ion-text color="danger" *ngIf="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid">
+          <small *ngIf="paymentForm.get('cvv')?.errors?.['required']">El CVV es obligatorio.</small>
+          <small *ngIf="paymentForm.get('cvv')?.errors?.['pattern']">Debe contener exactamente 3 dígitos numéricos.</small>
+        </ion-text>
+      </ion-item>
+    </form>
   </div>
-
   <!-- Contenedor para el botón de PayPal -->
   <div [hidden]="selectedMethod !== 'tarjetaDebito'" id="paypal-button-container" class="ion-padding">
     <!-- El botón de PayPal se renderizará aquí -->
@@ -157,10 +190,6 @@
     </ion-button>
   </div>
 </ion-content>
-
-
-
-
 
 
 

@@ -18,12 +18,17 @@ export class Tab1Page implements OnInit {
         {
             title: '100% RECOMENDADOS',
             description: '',
-            image: 'assets/images/familiar1.jpg',
+            image: 'assets/images/portada.jpg',
         },
         {
-            title: 'Tus recuerdos capturados',
+            title: 'LOS MEJORES EVENTOS',
             description: '',
-            image: 'assets/images/quinceaños2.jpg',
+            image: 'assets/images/boda20.jpg',
+        },
+        {
+            title: 'FOTOGRAFIA Y VIDEO PROFESIONAL',
+            description: '',
+            image: 'assets/images/quince20.jpg',
         },
     ];
 
