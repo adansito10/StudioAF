@@ -121,7 +121,7 @@
     </ion-item>
   </div>
 
-  <!-- Contenedor para el botón de PayPal, siempre presente pero oculto -->
+  <!-- Contenedor para el botón de PayPal -->
   <div [hidden]="selectedMethod !== 'tarjetaDebito'" id="paypal-button-container" class="ion-padding">
     <!-- El botón de PayPal se renderizará aquí -->
   </div>
@@ -131,8 +131,29 @@
     *ngIf="selectedMethod === 'tarjetaCredito' || selectedMethod === 'oxxo'"
     expand="full"
     (click)="submitPayment()"
-
+    [disabled]="isLoading"
     class="custom-confirm-button">
     Confirmar Pago
   </ion-button>
+
+  <!-- Spinner y mensajes de estado -->
+  <div class="loading-overlay" *ngIf="isLoading">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-message">
+      {{ selectedMethod === 'tarjetaCredito' ? 'Procesando pago...' : (selectedMethod === 'oxxo' ? 'Generando PDF...' : 'Procesando pago...') }}
+    </p>
+  </div>
+
+  <div class="success-overlay" *ngIf="isSuccess">
+    <ion-icon name="checkmark-circle" class="success-icon"></ion-icon>
+    <p class="success-message">
+      {{ selectedMethod === 'tarjetaCredito' ? 'Pago realizado' : (selectedMethod === 'oxxo' ? 'PDF generado' : 'Pago realizado') }}
+    </p>
+    <p class="success-details">
+      Total: ${{ paqueteSeleccionado.precio }}
+    </p>
+    <ion-button expand="full" (click)="navigateToHome()" class="custom-back-button">
+      Volver al inicio
+    </ion-button>
+  </div>
 </ion-content>

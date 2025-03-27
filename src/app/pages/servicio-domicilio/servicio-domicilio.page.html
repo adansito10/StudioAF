@@ -15,14 +15,13 @@
       <div class="col-md-6">
         <div class="card shadow-sm bg-dark text-white border-light">
           <div class="card-body">
-
             <!-- Botón para agregar ubicación -->
             <div class="d-grid mb-3">
               <button class="btn btn-light text-dark" (click)="usarUbicacion()">📍 Agregar mi ubicación</button>
             </div>
 
             <!-- Formulario -->
-            <form (submit)="enviarFormulario()">
+            <form (ngSubmit)="enviarFormulario()">
               <div class="mb-3">
                 <label for="direccion" class="form-label text-white">Dirección del Evento</label>
                 <input type="text" class="form-control bg-dark text-white border-light"
@@ -65,7 +64,7 @@
               <p class="text-center text-white">Nos pondremos en contacto contigo para confirmar los detalles.</p>
 
               <!-- Botón de confirmar reservación -->
-              <button routerLink="/metodo-pago" type="submit" class="btn btn-light text-dark w-100">Confirmar Reservación</button>
+              <button type="submit" class="btn btn-light text-dark w-100">Confirmar Reservación</button>
             </form>
           </div>
         </div>

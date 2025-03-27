@@ -58,6 +58,10 @@ const routes: Routes = [
   {
     path: 'resumen-servicio',
     loadChildren: () => import('./resumen-servicio/resumen-servicio.module').then(m => m.ResumenServicioPageModule)
+  },
+  {
+    path: 'contacto',
+    loadChildren: () => import('./contacto/contacto.module').then( m => m.ContactoPageModule)
   }
 ];
 

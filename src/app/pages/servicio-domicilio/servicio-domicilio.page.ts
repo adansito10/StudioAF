@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-servicio-domicilio',
@@ -19,9 +20,57 @@ export class ServicioDomicilioPage implements OnInit {
 
   ubicacionConfirmada = false;
 
-  constructor() {}
+  // Variables para los datos recibidos
+  servicio: any = {
+    nombre: '',
+    descripcion: '',
+    imagen: '',
+    contenido: [],
+    precio: 0
+  };
 
-  ngOnInit(): void {}
+  detallesExtras: any = {
+    horasExtras: 0,
+    camarografoExtra: false,
+    setGrabacion: false,
+    videoEvento: false,
+    fecha: '',
+    hora: ''
+  };
+
+  precioTotal: number = 0;
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
+    // Recuperar los datos pasados por queryParams
+    this.route.queryParams.subscribe(params => {
+      this.servicio = {
+        nombre: params['nombre'] || '',
+        descripcion: params['descripcion'] || '',
+        imagen: params['imagen'] || '',
+        contenido: params['contenido'] ? params['contenido'].split(',') : [],
+        precio: +params['precio'] || 0
+      };
+
+      this.detallesExtras = {
+        horasExtras: +params['horasExtras'] || 0,
+        camarografoExtra: params['camarografoExtra'] === 'true',
+        setGrabacion: params['setGrabacion'] === 'true',
+        videoEvento: params['videoEvento'] === 'true',
+        fecha: params['fecha'] || 'No especificada',
+        hora: params['hora'] || 'No especificada'
+      };
+
+      this.precioTotal = +params['precio'] || this.servicio.precio;
+    });
+
+    // Recuperar el domicilio de localStorage (si existe)
+    const domicilioGuardado = localStorage.getItem('domicilio');
+    if (domicilioGuardado) {
+      this.formulario = JSON.parse(domicilioGuardado);
+    }
+  }
 
   usarUbicacion() {
     if (navigator.geolocation) {
@@ -65,7 +114,24 @@ export class ServicioDomicilioPage implements OnInit {
   }
 
   enviarFormulario() {
-    console.log('Datos enviados:', this.formulario);
-    alert('Formulario enviado con éxito');
+    // Guardar el domicilio en localStorage
+    this.guardarDomicilio(this.formulario);
+
+    // Navegar a MetodoPagoPage pasando los datos
+    this.router.navigate(['/metodo-pago'], {
+      queryParams: {
+        nombre: this.servicio.nombre,
+        precio: this.precioTotal,
+        descripcion: this.servicio.descripcion,
+        imagen: this.servicio.imagen,
+        contenido: this.servicio.contenido.join(','),
+        horasExtras: this.detallesExtras.horasExtras,
+        camarografoExtra: this.detallesExtras.camarografoExtra,
+        setGrabacion: this.detallesExtras.setGrabacion,
+        videoEvento: this.detallesExtras.videoEvento,
+        fecha: this.detallesExtras.fecha,
+        hora: this.detallesExtras.hora
+      }
+    });
   }
 }

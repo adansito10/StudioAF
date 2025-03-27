@@ -27,27 +27,27 @@
         <li *ngIf="detallesExtras.horasExtras > 0">⏳ {{ detallesExtras.horasExtras }} horas extras (${{ detallesExtras.horasExtras * 300 }})</li>
 
         <!-- Paquete de Bodas -->
-        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.camarografoExtra">🎥 Video resumen de boda ($1500)</li>
-        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.drone">📸 Photobooth para invitados ($1200)</li>
-        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.albumPremium">📷 Set de fotos giratorio ($900)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.camarografoExtra">Video resumen de boda ($1500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.drone">Photobooth para invitados ($1200)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.albumPremium">Set de fotos giratorio ($900)</li>
 
         <!-- Paquete de XV Años -->
-        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.maquillaje">📸 Sesión de fotos ($1000)</li>
-        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.videoCoreografia">🎥 Video de cobertura de vals ($2500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.maquillaje">Sesión de fotos ($1000)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.videoCoreografia">Video de cobertura de vals ($2500)</li>
 
         <!-- Paquete BabyShower -->
-        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.decoracionExtra">🎉 Decoración extra ($400)</li>
-        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.videoRecuerdo">🎥 Video recuerdo ($700)</li>
+        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.decoracionExtra">Decoración extra ($400)</li>
+        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.videoRecuerdo">Video recuerdo ($700)</li>
 
         <!-- Paquete Familiar -->
-        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.locacionExtra">📍 Locación extra ($300)</li>
-        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.marcoFotos">🖼️ Marco de fotos ($200)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.locacionExtra">Locación extra ($300)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.marcoFotos">Marco de fotos ($200)</li>
 
 
 
-        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.videoretrato">🎥 Video retrato ($1500)</li>
-        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.marcoFotos">📸 Marco de fotos del bebe ($800)</li>
-        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.albumedefotos">📷 Albume de fotos ($1500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.videoretrato">Video retrato ($1500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.marcoFotos">Marco de fotos del bebe ($800)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.albumedefotos">Albume de fotos ($1500)</li>
 
         <!-- Fecha y Hora -->
         <li><strong>Fecha:</strong> {{ detallesExtras.fecha }}</li>

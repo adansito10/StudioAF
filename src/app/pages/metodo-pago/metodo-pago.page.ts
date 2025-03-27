@@ -31,12 +31,16 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
 
   paqueteSeleccionado: any = {
     nombre: '',
-    precio: 0 // Inicializado como número
+    precio: 0
   };
   ventaId: string = '123456';
 
   months: string[] = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'));
   years: string[] = Array.from({ length: 10 }, (_, i) => (new Date().getFullYear() + i).toString());
+
+  // Estados para el spinner y el mensaje de éxito
+  isLoading: boolean = false;
+  isSuccess: boolean = false;
 
   constructor(
     private router: Router,
@@ -48,10 +52,9 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.paqueteSeleccionado.nombre = params['nombre'];
-      // Parsear como número desde los parámetros
-      this.paqueteSeleccionado.precio = parseFloat(params['precioTotal']) || parseFloat(params['precio']) || 0;
-      console.log('Precio parseado:', this.paqueteSeleccionado.precio); // Depuración
+      this.paqueteSeleccionado.nombre = params['nombre'] || '';
+      this.paqueteSeleccionado.precio = parseFloat(params['precio']) || 0;
+      console.log('Datos recibidos en MetodoPagoPage:', this.paqueteSeleccionado);
     });
   }
 
@@ -84,23 +87,37 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
   }
 
   async submitPayment() {
+    if (!this.paqueteSeleccionado.precio || this.paqueteSeleccionado.precio <= 0) {
+      alert('Error: El precio total no es válido. Por favor, regresa y selecciona un servicio.');
+      this.router.navigate(['/formulario']);
+      return;
+    }
+
+    // Mostrar el spinner
+    this.isLoading = true;
+
     console.log('Método seleccionado:', this.selectedMethod);
     if (this.selectedMethod === 'tarjetaCredito') {
       console.log('Pago con tarjeta de crédito:', this.formData);
-      await this.generatePaymentReceipt();
-      alert(`Pago realizado con éxito. Total: $${this.paqueteSeleccionado.precio}`);
-      this.router.navigate(['/tabs/tab1']);
+      // Simular un retraso para el procesamiento del pago
+      setTimeout(async () => {
+        await this.generatePaymentReceipt();
+        this.isLoading = false;
+        this.isSuccess = true;
+      }, 2000); // 2 segundos de retraso para simular el procesamiento
     } else if (this.selectedMethod === 'oxxo') {
-      await this.generatePdfWithQRCode();
-      alert(`Instrucciones de pago en OXXO generadas. Total: $${this.paqueteSeleccionado.precio}`);
-      this.router.navigate(['/tabs/tab1']);
+      // Simular un retraso para la generación del PDF
+      setTimeout(async () => {
+        await this.generatePdfWithQRCode();
+        this.isLoading = false;
+        this.isSuccess = true;
+      }, 2000); // 2 segundos de retraso para simular la generación del PDF
     }
   }
 
   private loadPayPalScript() {
     if (this.paypalScriptLoaded) return;
 
-    // Construir la URL correctamente sin codificación doble
     const scriptUrl = `https://www.paypal.com/sdk/js?client-id=${this.clientId}&currency=USD`;
 
     console.log('Intentando cargar PayPal SDK con URL:', scriptUrl);
@@ -144,8 +161,12 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
             return actions.order.capture().then((details: any) => {
               console.log('Pago completado:', details);
               alert(`¡Pago exitoso con PayPal! ID de transacción: ${details.id}`);
-              this.generatePaymentReceipt();
-              this.router.navigate(['/tabs/tab1']);
+              this.isLoading = true; // Mostrar el spinner mientras se genera el comprobante
+              setTimeout(async () => {
+                await this.generatePaymentReceipt();
+                this.isLoading = false;
+                this.isSuccess = true;
+              }, 2000); // 2 segundos de retraso para simular el procesamiento
             });
           },
           onError: (err: any) => {
@@ -162,10 +183,6 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
     }
   }
 
-  private async handleMobilePayment() {
-    alert('Función de pago móvil con PayPal en desarrollo. Usa la versión web por ahora.');
-  }
-
   async generatePdfWithQRCode() {
     const doc = new jsPDF();
     const ventaDetails = `ID de Venta: ${this.ventaId}\nPaquete: ${this.paqueteSeleccionado.nombre}\nPrecio: $${this.paqueteSeleccionado.precio}`;
@@ -176,6 +193,8 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
       await this.saveFile(doc.output('blob'), 'pago_oxxo.pdf');
     } catch (error) {
       console.error('Error al generar el código QR:', error);
+      this.isLoading = false; // Asegurarse de que el spinner se detenga en caso de error
+      alert('Error al generar el PDF para OXXO. Intenta de nuevo.');
     }
   }
 
@@ -216,8 +235,13 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
       link.href = url;
       link.download = fileName;
       link.click();
-      document.body.removeChild(link);
+      // No intentamos eliminar el elemento, ya que no lo agregamos al DOM
       URL.revokeObjectURL(url);
     }
+  }
+
+  navigateToHome() {
+    this.isSuccess = false;
+    this.router.navigateByUrl('/tabs/tab1');
   }
 }

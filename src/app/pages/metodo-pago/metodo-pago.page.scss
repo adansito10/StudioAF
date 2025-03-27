@@ -57,3 +57,108 @@ ion-item {
 .texto-blanco {
   color: white;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para el overlay de carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-message {
+  color: white;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+ion-spinner {
+  --color: white;
+  width: 50px;
+  height: 50px;
+}
+
+/* Estilos para el overlay de éxito */
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.success-icon {
+  color: #28a745; // Verde para la palomita
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.success-details {
+  color: #cccccc;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-back-button {
+  --background: #f8f9fa;
+  --color: #343a40;
+  --border-radius: 10px;
+  margin: 0 20px;
+  width: calc(100% - 40px);
+}
+
+.custom-back-button:hover {
+  --background: #e2e6ea;
+}

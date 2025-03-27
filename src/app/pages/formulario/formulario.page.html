@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar class="bg-dark">
     <ion-buttons slot="start">
-      <ion-button routerLink="/resumen-servicio">
-      </ion-button>
+    
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -13,23 +12,45 @@
   </ion-text>
 
   <ion-card button style="--background: #333333;" 
-          [routerLink]="'/metodo-pago'" 
-          [queryParams]="{
-            nombre: servicio.nombre,
-            precio: precioTotal
-          }">
-  <ion-item lines="none" style="--background: #333333;">
-    <ion-label>
-      <h2 class="text-light">Ir a mi domicilio</h2>
-      <p class="text-light">{{ domicilio?.direccion }}</p>
-      <p class="text-light"><strong>$300</strong></p>
-    </ion-label>
-    <ion-icon name="chevron-forward-outline" class="icono-blanco"></ion-icon>
-  </ion-item>
-</ion-card>
+            [routerLink]="'/metodo-pago'" 
+            [queryParams]="{
+              nombre: servicio.nombre,
+              precio: precioTotal,
+              descripcion: servicio.descripcion,
+              imagen: servicio.imagen,
+              contenido: servicio.contenido.join(','),
+              horasExtras: detallesExtras.horasExtras,
+              camarografoExtra: detallesExtras.camarografoExtra,
+              setGrabacion: detallesExtras.setGrabacion,
+              videoEvento: detallesExtras.videoEvento,
+              fecha: detallesExtras.fecha,
+              hora: detallesExtras.hora
+            }">
+    <ion-item lines="none" style="--background: #333333;">
+      <ion-label>
+        <h2 class="text-light">Ir a mi domicilio</h2>
+        <p class="text-light">{{ domicilio?.direccion }}</p>
+        <p class="text-light"><strong>$0</strong></p>
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" class="icono-blanco"></ion-icon>
+    </ion-item>
+  </ion-card>
 
-
-  <ion-text color="primary" routerLink="/servicio-domicilio">
+  <ion-text color="primary" 
+            [routerLink]="'/servicio-domicilio'"
+            [queryParams]="{
+              nombre: servicio.nombre,
+              precio: precioTotal,
+              descripcion: servicio.descripcion,
+              imagen: servicio.imagen,
+              contenido: servicio.contenido.join(','),
+              horasExtras: detallesExtras.horasExtras,
+              camarografoExtra: detallesExtras.camarografoExtra,
+              setGrabacion: detallesExtras.setGrabacion,
+              videoEvento: detallesExtras.videoEvento,
+              fecha: detallesExtras.fecha,
+              hora: detallesExtras.hora
+            }">
     <p class="text-right">Editar o elegir otro domicilio</p>
   </ion-text>
 </ion-content>
