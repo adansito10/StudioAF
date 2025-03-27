@@ -25,7 +25,7 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
     saveCard: false
   };
 
-  private clientId = 'ATIofl8OUzubLTHl2IN2maj2n2CQz23k2Htk6VKejP6wf9Sa8Myg3bskj_ejS0slc5cWNvAgX_L4X_dt';
+  private clientId = 'ATIofl8OUzubLTHl2IN2maj2n2CQz23k2Htk6VKejP6wf9Sa8Myg3bskj_ejS0slc5cWNvAgX_L4X_dt'; // Reemplaza con tu Client ID válido
   private paypalScriptLoaded = false;
   public isWeb: boolean;
 
@@ -118,7 +118,8 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
   private loadPayPalScript() {
     if (this.paypalScriptLoaded) return;
 
-    const scriptUrl = `https://www.paypal.com/sdk/js?client-id=${this.clientId}&currency=USD`;
+    // Construir la URL asegurándonos de que los parámetros estén correctamente codificados
+    const scriptUrl = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(this.clientId)}&currency=USD`;
 
     console.log('Intentando cargar PayPal SDK con URL:', scriptUrl);
 
@@ -183,32 +184,195 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
     }
   }
 
+  // Función auxiliar para cargar el logo de la empresa
+  private async loadImageAsBase64(url: string): Promise<string> {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    } catch (error) {
+      console.error('Error al cargar la imagen:', error);
+      return '';
+    }
+  }
+
+  async generatePaymentReceipt() {
+    const doc = new jsPDF();
+    
+    // Colores y estilos
+    const primaryColor = '#1a73e8'; // Azul similar al de Steam
+    const secondaryColor = '#333333'; // Gris oscuro para texto
+    const accentColor = '#e0e0e0'; // Gris claro para fondos
+
+    // Cargar el logo de la empresa (reemplaza con la URL o ruta de tu logo)
+    const logoUrl = 'https://via.placeholder.com/100x50.png?text=Logo+Empresa'; // URL de ejemplo
+    const logoBase64 = await this.loadImageAsBase64(logoUrl);
+
+    // Encabezado
+    if (logoBase64) {
+      doc.addImage(logoBase64, 'PNG', 10, 10, 50, 25); // Logo en la esquina superior izquierda
+    }
+    doc.setFontSize(20);
+    doc.setTextColor(primaryColor);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Comprobante de Pago', 140, 20, { align: 'right' });
+
+    // Línea divisoria
+    doc.setLineWidth(0.5);
+    doc.setDrawColor(primaryColor);
+    doc.line(10, 40, 200, 40);
+
+    // Información de la empresa
+    doc.setFontSize(12);
+    doc.setTextColor(secondaryColor);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Nombre de la Empresa: Eventos Especiales S.A.', 10, 50);
+    doc.text('Dirección: Av. Principal 123, Ciudad, País', 10, 60);
+    doc.text('Correo: contacto@eventosespeciales.com', 10, 70);
+    doc.text('Teléfono: +52 123 456 7890', 10, 80);
+
+    // Detalles de la transacción
+    doc.setFontSize(14);
+    doc.setTextColor(primaryColor);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Detalles de la Transacción', 10, 100);
+
+    doc.setFontSize(12);
+    doc.setTextColor(secondaryColor);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Fecha: ${new Date().toLocaleString()}`, 10, 110);
+    doc.text(`ID de Venta: ${this.ventaId}`, 10, 120);
+    doc.text(`Paquete: ${this.paqueteSeleccionado.nombre}`, 10, 130);
+    doc.text(`Total: $${this.paqueteSeleccionado.precio.toFixed(2)} MXN`, 10, 140);
+    doc.text(`Método de Pago: ${this.selectedMethodName}`, 10, 150);
+
+    // Detalles del método de pago (tarjeta o PayPal)
+    doc.setFontSize(14);
+    doc.setTextColor(primaryColor);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Información de Pago', 10, 170);
+
+    doc.setFontSize(12);
+    doc.setTextColor(secondaryColor);
+    doc.setFont('helvetica', 'normal');
+    if (this.selectedMethod === 'tarjetaCredito') {
+      doc.text(`Nombre en la Tarjeta: ${this.formData.nombreTarjeta}`, 10, 180);
+      doc.text(`Número de Tarjeta: **** **** **** ${this.formData.numeroTarjeta.slice(-4)}`, 10, 190);
+      doc.text(`Fecha de Expiración: ${this.formData.expiracionMes}/${this.formData.expiracionYear}`, 10, 200);
+    } else if (this.selectedMethod === 'tarjetaDebito') {
+      doc.text('Método: PayPal', 10, 180);
+      doc.text('Estado: Pago Completado', 10, 190);
+    }
+
+    // Pie de página
+    doc.setFillColor(accentColor);
+    doc.rect(0, 270, 210, 30, 'F'); // Fondo gris claro
+    doc.setFontSize(10);
+    doc.setTextColor(secondaryColor);
+    doc.text('Gracias por tu compra. Si tienes alguna duda, contáctanos.', 105, 280, { align: 'center' });
+    doc.text('© 2025 Eventos Especiales S.A. Todos los derechos reservados.', 105, 290, { align: 'center' });
+
+    // Guardar el PDF
+    await this.saveFile(doc.output('blob'), 'comprobante_pago.pdf');
+  }
+
   async generatePdfWithQRCode() {
     const doc = new jsPDF();
-    const ventaDetails = `ID de Venta: ${this.ventaId}\nPaquete: ${this.paqueteSeleccionado.nombre}\nPrecio: $${this.paqueteSeleccionado.precio}`;
+    
+    // Colores y estilos
+    const primaryColor = '#1a73e8'; // Azul similar al de Steam
+    const secondaryColor = '#333333'; // Gris oscuro para texto
+    const accentColor = '#e0e0e0'; // Gris claro para fondos
+
+    // Cargar el logo de la empresa (reemplaza con la URL o ruta de tu logo)
+    const logoUrl = 'https://via.placeholder.com/100x50.png?text=Logo+Empresa'; // URL de ejemplo
+    const logoBase64 = await this.loadImageAsBase64(logoUrl);
+
+    // Encabezado
+    if (logoBase64) {
+      doc.addImage(logoBase64, 'PNG', 10, 10, 50, 25); // Logo en la esquina superior izquierda
+    }
+    doc.setFontSize(20);
+    doc.setTextColor(primaryColor);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Instrucciones de Pago en OXXO', 140, 20, { align: 'right' });
+
+    // Línea divisoria
+    doc.setLineWidth(0.5);
+    doc.setDrawColor(primaryColor);
+    doc.line(10, 40, 200, 40);
+
+    // Información de la empresa
+    doc.setFontSize(12);
+    doc.setTextColor(secondaryColor);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Nombre de la Empresa: Eventos Especiales S.A.', 10, 50);
+    doc.text('Dirección: Av. Principal 123, Ciudad, País', 10, 60);
+    doc.text('Correo: contacto@eventosespeciales.com', 10, 70);
+    doc.text('Teléfono: +52 123 456 7890', 10, 80);
+
+    // Detalles de la transacción
+    doc.setFontSize(14);
+    doc.setTextColor(primaryColor);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Detalles de la Transacción', 10, 100);
+
+    doc.setFontSize(12);
+    doc.setTextColor(secondaryColor);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Fecha: ${new Date().toLocaleString()}`, 10, 110);
+    doc.text(`ID de Venta: ${this.ventaId}`, 10, 120);
+    doc.text(`Paquete: ${this.paqueteSeleccionado.nombre}`, 10, 130);
+    doc.text(`Total: $${this.paqueteSeleccionado.precio.toFixed(2)} MXN`, 10, 140);
+    doc.text(`Método de Pago: ${this.selectedMethodName}`, 10, 150);
+
+    // Código QR para el pago en OXXO
     try {
       const qrUrl = await toDataURL(`Pago OXXO - ID de Venta: ${this.ventaId}`, { errorCorrectionLevel: 'H' });
-      doc.text(ventaDetails, 10, 10);
-      doc.addImage(qrUrl, 'PNG', 10, 30, 50, 50);
+      doc.setFontSize(14);
+      doc.setTextColor(primaryColor);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Escanea este código QR en OXXO para pagar', 10, 170);
+
+      doc.addImage(qrUrl, 'PNG', 10, 180, 50, 50);
+
+      // Instrucciones para el pago en OXXO
+      doc.setFontSize(12);
+      doc.setTextColor(secondaryColor);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Instrucciones:', 70, 180);
+      doc.text('1. Visita tu tienda OXXO más cercana.', 70, 190);
+      doc.text('2. Escanea el código QR en la terminal de pago.', 70, 200);
+      doc.text(`3. Paga el monto exacto de $${this.paqueteSeleccionado.precio.toFixed(2)} MXN.`, 70, 210);
+      doc.text('4. Guarda el comprobante que te entreguen.', 70, 220);
+      doc.text('5. Tu pago será confirmado en un plazo de 24-48 horas.', 70, 230);
+
+      // Número de referencia
+      doc.setFontSize(12);
+      doc.setTextColor(primaryColor);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Número de Referencia: ${this.ventaId}`, 70, 250);
+
+      // Pie de página
+      doc.setFillColor(accentColor);
+      doc.rect(0, 270, 210, 30, 'F'); // Fondo gris claro
+      doc.setFontSize(10);
+      doc.setTextColor(secondaryColor);
+      doc.text('Gracias por tu compra. Si tienes alguna duda, contáctanos.', 105, 280, { align: 'center' });
+      doc.text('© 2025 Eventos Especiales S.A. Todos los derechos reservados.', 105, 290, { align: 'center' });
+
+      // Guardar el PDF
       await this.saveFile(doc.output('blob'), 'pago_oxxo.pdf');
     } catch (error) {
       console.error('Error al generar el código QR:', error);
       this.isLoading = false; // Asegurarse de que el spinner se detenga en caso de error
       alert('Error al generar el PDF para OXXO. Intenta de nuevo.');
     }
-  }
-
-  async generatePaymentReceipt() {
-    const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text('Comprobante de Pago', 10, 10);
-    doc.setFontSize(12);
-    doc.text(`Fecha: ${new Date().toLocaleString()}`, 10, 20);
-    doc.text(`ID de Venta: ${this.ventaId}`, 10, 30);
-    doc.text(`Paquete: ${this.paqueteSeleccionado.nombre}`, 10, 40);
-    doc.text(`Total: $${this.paqueteSeleccionado.precio}`, 10, 50);
-    doc.text(`Método de Pago: ${this.selectedMethodName}`, 10, 60);
-    await this.saveFile(doc.output('blob'), 'comprobante_pago.pdf');
   }
 
   async saveFile(blob: Blob, fileName: string) {

@@ -30,6 +30,22 @@
                   <label class="form-label">Set de fotos giratorio ($900):</label>
                   <input type="checkbox" [(ngModel)]="formulario.albumPremium" name="albumPremium" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
+                <div class="mb-3">
+                  <label class="form-label">Sesión pre-boda ($1000):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.sesionPreBoda" name="sesionPreBoda" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Iluminación profesional ($800):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.iluminacionProfesional" name="iluminacionProfesional" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Álbum digital ($600):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.albumDigital" name="albumDigital" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Cobertura de redes sociales ($500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.coberturaRedes" name="coberturaRedes" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
               <!-- Campos específicos para Paquete de XV Años -->
@@ -41,6 +57,22 @@
                 <div class="mb-3">
                   <label class="form-label">Video de cobertura de vals ($2500):</label>
                   <input type="checkbox" [(ngModel)]="formulario.videoCoreografia" name="videoCoreografia" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Coreografía profesional ($1200):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.coreografiaProfesional" name="coreografiaProfesional" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Cabina de fotos 360 ($1500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.cabinaFotos360" name="cabinaFotos360" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Pastel temático ($800):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.pastelTematico" name="pastelTematico" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Invitaciones digitales ($400):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.invitacionesDigitales" name="invitacionesDigitales" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
               </div>
 
@@ -54,6 +86,22 @@
                   <label class="form-label">Video Recuerdo ($700):</label>
                   <input type="checkbox" [(ngModel)]="formulario.videoRecuerdo" name="videoRecuerdo" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
+                <div class="mb-3">
+                  <label class="form-label">Mesa de dulces personalizada ($600):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.mesaDulces" name="mesaDulces" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Juegos interactivos ($300):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.juegosInteractivos" name="juegosInteractivos" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Sesión de fotos para los padres ($500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.sesionFotosPadres" name="sesionFotosPadres" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Recuerdos personalizados ($400):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.recuerdosPersonalizados" name="recuerdosPersonalizados" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
               <!-- Campos específicos para Paquete Familiar -->
@@ -66,9 +114,25 @@
                   <label class="form-label">Marco de Fotos ($200):</label>
                   <input type="checkbox" [(ngModel)]="formulario.marcoFotos" name="marcoFotos" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
+                <div class="mb-3">
+                  <label class="form-label">Sesión en exteriores ($500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.sesionExteriores" name="sesionExteriores" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Impresión de lienzo ($400):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.impresionLienzo" name="impresionLienzo" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Vestuario temático ($300):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.vestuarioTematico" name="vestuarioTematico" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Video familiar ($600):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.videoFamiliar" name="videoFamiliar" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
-
+              <!-- Campos específicos para Paquete Bautizo -->
               <div *ngIf="tipoServicio === 'Paquete Bautizo'">
                 <div class="mb-3">
                   <label class="form-label">Video recuerdo ($1500):</label>
@@ -78,12 +142,26 @@
                   <label class="form-label">Marco de fotos ($800):</label>
                   <input type="checkbox" [(ngModel)]="formulario.marcoFotos" name="marcoFotos" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
-
                 <div class="mb-3">
-                  <label class="form-label">Albume de fotos ($1500):</label>
-                  <input type="checkbox" [(ngModel)]="formulario.albumedefotos" name="marcodefotos" class="form-check-input" (change)="actualizarPrecio()">
+                  <label class="form-label">Álbum de fotos ($1500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.albumedefotos" name="albumedefotos" class="form-check-input" (change)="actualizarPrecio()">
                 </div>
-                
+                <div class="mb-3">
+                  <label class="form-label">Invitaciones físicas ($500):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.invitacionesFisicas" name="invitacionesFisicas" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Sesión de fotos en la iglesia ($700):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.sesionIglesia" name="sesionIglesia" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Libro de firmas ($300):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.libroFirmas" name="libroFirmas" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Decoración temática ($600):</label>
+                  <input type="checkbox" [(ngModel)]="formulario.decoracionTematica" name="decoracionTematica" class="form-check-input" (change)="actualizarPrecio()">
+                </div>
               </div>
 
               <div>
@@ -92,14 +170,14 @@
 
               <!-- Campos comunes: Fecha y Hora -->
               <div class="mb-3">
-                <label class="form-label">Fecha:</label>
+                <label class="form-label">Fecha:*</label>
                 <input type="date" [(ngModel)]="formulario.fecha" name="fecha" class="form-control" (change)="validarFecha()">
                 <ion-text color="danger" *ngIf="fechaInvalida">
                   <small>La fecha no puede ser anterior a hoy.</small>
                 </ion-text>
               </div>
               <div class="mb-3">
-                <label class="form-label">Hora:</label>
+                <label class="form-label">Hora:*</label>
                 <input type="time" [(ngModel)]="formulario.hora" name="hora" class="form-control" step="1800">
               </div>
 
@@ -107,7 +185,7 @@
               <h4 class="text-light">Precio Total: ${{ precioTotal }}</h4>
 
               <!-- Botón de confirmar -->
-              <button type="submit" class="btn btn-light w-100" [disabled]="fechaInvalida || !formulario.fecha || !formulario.hora">
+              <button type="submit" class="btn btn-light w-100" [disabled]="fechaInvalida || !formulario.fecha || !formulario.hora" (click)="mostrarMensajeSiDesactivado()">
                 Confirmar
               </button>
             </form>

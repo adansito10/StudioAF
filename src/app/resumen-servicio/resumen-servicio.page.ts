@@ -45,28 +45,47 @@ export class ResumenServicioPage implements OnInit {
           this.detallesExtras.camarografoExtra = params['camarografoExtra'] === 'true';
           this.detallesExtras.drone = params['drone'] === 'true';
           this.detallesExtras.albumPremium = params['albumPremium'] === 'true';
+          this.detallesExtras.sesionPreBoda = params['sesionPreBoda'] === 'true';
+          this.detallesExtras.iluminacionProfesional = params['iluminacionProfesional'] === 'true';
+          this.detallesExtras.albumDigital = params['albumDigital'] === 'true';
+          this.detallesExtras.coberturaRedes = params['coberturaRedes'] === 'true';
           break;
         case 'Paquete de XV Años':
           this.detallesExtras.maquillaje = params['maquillaje'] === 'true';
           this.detallesExtras.videoCoreografia = params['videoCoreografia'] === 'true';
+          this.detallesExtras.coreografiaProfesional = params['coreografiaProfesional'] === 'true';
+          this.detallesExtras.cabinaFotos360 = params['cabinaFotos360'] === 'true';
+          this.detallesExtras.pastelTematico = params['pastelTematico'] === 'true';
+          this.detallesExtras.invitacionesDigitales = params['invitacionesDigitales'] === 'true';
           break;
         case 'Paquete BabyShower':
           this.detallesExtras.decoracionExtra = params['decoracionExtra'] === 'true';
           this.detallesExtras.videoRecuerdo = params['videoRecuerdo'] === 'true';
+          this.detallesExtras.mesaDulces = params['mesaDulces'] === 'true';
+          this.detallesExtras.juegosInteractivos = params['juegosInteractivos'] === 'true';
+          this.detallesExtras.sesionFotosPadres = params['sesionFotosPadres'] === 'true';
+          this.detallesExtras.recuerdosPersonalizados = params['recuerdosPersonalizados'] === 'true';
           break;
         case 'Paquete Familiar':
           this.detallesExtras.locacionExtra = params['locacionExtra'] === 'true';
           this.detallesExtras.marcoFotos = params['marcoFotos'] === 'true';
+          this.detallesExtras.sesionExteriores = params['sesionExteriores'] === 'true';
+          this.detallesExtras.impresionLienzo = params['impresionLienzo'] === 'true';
+          this.detallesExtras.vestuarioTematico = params['vestuarioTematico'] === 'true';
+          this.detallesExtras.videoFamiliar = params['videoFamiliar'] === 'true';
           break;
-
-          case 'Paquete Bautizo':
-            this.detallesExtras.videoretrato = params['videoretrato'] === 'true';
-            this.detallesExtras.marcoFotos = params['marcoFotos'] === 'true';
-            this.detallesExtras.albumedefotos = params['albumedefotos'] === 'true';
-            break;
+        case 'Paquete Bautizo':
+          this.detallesExtras.videoretrato = params['videoretrato'] === 'true';
+          this.detallesExtras.marcoFotos = params['marcoFotos'] === 'true';
+          this.detallesExtras.albumedefotos = params['albumedefotos'] === 'true';
+          this.detallesExtras.invitacionesFisicas = params['invitacionesFisicas'] === 'true';
+          this.detallesExtras.sesionIglesia = params['sesionIglesia'] === 'true';
+          this.detallesExtras.libroFirmas = params['libroFirmas'] === 'true';
+          this.detallesExtras.decoracionTematica = params['decoracionTematica'] === 'true';
+          break;
       }
 
-      this.precioTotal = +params['precioTotal'] || this.servicio.precio; // Mostrar el precio actualizado
+      this.precioTotal = +params['precioTotal'] || this.servicio.precio;
     });
   }
 }

@@ -25,7 +25,10 @@
       <!-- Contraseña -->
       <ion-item class="input-field" [class.valid]="isValid('contrasena')" [class.invalid]="contrasenaControl.touched && contrasenaControl.invalid">
         <ion-icon name="lock-closed" slot="start"></ion-icon>
-        <ion-input type="password" formControlName="contrasena" placeholder="Contraseña"></ion-input>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="contrasena" placeholder="Contraseña"></ion-input>
+        <ion-button slot="end" fill="clear" (click)="togglePasswordVisibility()" class="toggle-password-button">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+        </ion-button>
         <ion-icon *ngIf="isValid('contrasena')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
         <ion-icon *ngIf="contrasenaControl.touched && contrasenaControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
       </ion-item>

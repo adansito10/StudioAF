@@ -34,7 +34,10 @@
       <!-- Contraseña -->
       <ion-item class="input-field" [class.valid]="isValid('contrasena')" [class.invalid]="contrasenaControl.touched && contrasenaControl.invalid">
         <ion-icon name="lock-closed" slot="start"></ion-icon>
-        <ion-input type="password" formControlName="contrasena" placeholder="Contraseña" maxlength="12"></ion-input>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="contrasena" placeholder="Contraseña" maxlength="12"></ion-input>
+        <ion-button slot="end" fill="clear" (click)="togglePasswordVisibility()" class="toggle-password-button">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+        </ion-button>
         <ion-icon *ngIf="isValid('contrasena')" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
         <ion-icon *ngIf="contrasenaControl.touched && contrasenaControl.invalid" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
       </ion-item>
@@ -48,7 +51,10 @@
       <!-- Confirmar Contraseña -->
       <ion-item class="input-field" [class.valid]="isConfirmPasswordValid()" [class.invalid]="confirmarContrasenaControl.touched && (confirmarContrasenaControl.invalid || hasMismatchError())">
         <ion-icon name="lock-closed" slot="start"></ion-icon>
-        <ion-input type="password" formControlName="confirmarContrasena" placeholder="Confirmar contraseña" maxlength="12"></ion-input>
+        <ion-input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmarContrasena" placeholder="Confirmar contraseña" maxlength="12"></ion-input>
+        <ion-button slot="end" fill="clear" (click)="toggleConfirmPasswordVisibility()" class="toggle-password-button">
+          <ion-icon [name]="showConfirmPassword ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+        </ion-button>
         <ion-icon *ngIf="isConfirmPasswordValid()" name="checkmark-circle" slot="end" class="validation-icon valid"></ion-icon>
         <ion-icon *ngIf="confirmarContrasenaControl.touched && (confirmarContrasenaControl.invalid || hasMismatchError())" name="alert-circle" slot="end" class="validation-icon invalid"></ion-icon>
       </ion-item>

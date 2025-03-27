@@ -13,6 +13,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 export class RegistroPage implements OnInit {
   registerForm: FormGroup;
   isSubmitting: boolean = false;
+  showPassword: boolean = false; // Variable para controlar la visibilidad de la contraseña
+  showConfirmPassword: boolean = false; // Variable para controlar la visibilidad de la confirmación de contraseña
 
   constructor(
     private authService: AuthService,
@@ -100,6 +102,14 @@ export class RegistroPage implements OnInit {
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword; // Alternar visibilidad de la contraseña
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword; // Alternar visibilidad de la confirmación de contraseña
   }
 
   get nombreControl(): FormControl {

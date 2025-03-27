@@ -30,24 +30,43 @@
         <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.camarografoExtra">Video resumen de boda ($1500)</li>
         <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.drone">Photobooth para invitados ($1200)</li>
         <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.albumPremium">Set de fotos giratorio ($900)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.sesionPreBoda">Sesión pre-boda ($1000)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.iluminacionProfesional">Iluminación profesional ($800)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.albumDigital">Álbum digital ($600)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de Bodas' && detallesExtras.coberturaRedes">Cobertura de redes sociales ($500)</li>
 
         <!-- Paquete de XV Años -->
         <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.maquillaje">Sesión de fotos ($1000)</li>
         <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.videoCoreografia">Video de cobertura de vals ($2500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.coreografiaProfesional">Coreografía profesional ($1200)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.cabinaFotos360">Cabina de fotos 360 ($1500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.pastelTematico">Pastel temático ($800)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de XV Años' && detallesExtras.invitacionesDigitales">Invitaciones digitales ($400)</li>
 
         <!-- Paquete BabyShower -->
         <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.decoracionExtra">Decoración extra ($400)</li>
         <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.videoRecuerdo">Video recuerdo ($700)</li>
+        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.mesaDulces">Mesa de dulces personalizada ($600)</li>
+        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.juegosInteractivos">Juegos interactivos ($300)</li>
+        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.sesionFotosPadres">Sesión de fotos para los padres ($500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete BabyShower' && detallesExtras.recuerdosPersonalizados">Recuerdos personalizados ($400)</li>
 
         <!-- Paquete Familiar -->
         <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.locacionExtra">Locación extra ($300)</li>
         <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.marcoFotos">Marco de fotos ($200)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.sesionExteriores">Sesión en exteriores ($500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.impresionLienzo">Impresión de lienzo ($400)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.vestuarioTematico">Vestuario temático ($300)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Familiar' && detallesExtras.videoFamiliar">Video familiar ($600)</li>
 
-
-
+        <!-- Paquete Bautizo -->
         <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.videoretrato">Video retrato ($1500)</li>
-        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.marcoFotos">Marco de fotos del bebe ($800)</li>
-        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.albumedefotos">Albume de fotos ($1500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.marcoFotos">Marco de fotos del bebé ($800)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.albumedefotos">Álbum de fotos ($1500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.invitacionesFisicas">Invitaciones físicas ($500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.sesionIglesia">Sesión de fotos en la iglesia ($700)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.libroFirmas">Libro de firmas ($300)</li>
+        <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.decoracionTematica">Decoración temática ($600)</li>
 
         <!-- Fecha y Hora -->
         <li><strong>Fecha:</strong> {{ detallesExtras.fecha }}</li>
@@ -72,12 +91,34 @@
         camarografoExtra: detallesExtras.camarografoExtra,
         drone: detallesExtras.drone,
         albumPremium: detallesExtras.albumPremium,
+        sesionPreBoda: detallesExtras.sesionPreBoda,
+        iluminacionProfesional: detallesExtras.iluminacionProfesional,
+        albumDigital: detallesExtras.albumDigital,
+        coberturaRedes: detallesExtras.coberturaRedes,
         maquillaje: detallesExtras.maquillaje,
         videoCoreografia: detallesExtras.videoCoreografia,
+        coreografiaProfesional: detallesExtras.coreografiaProfesional,
+        cabinaFotos360: detallesExtras.cabinaFotos360,
+        pastelTematico: detallesExtras.pastelTematico,
+        invitacionesDigitales: detallesExtras.invitacionesDigitales,
         decoracionExtra: detallesExtras.decoracionExtra,
         videoRecuerdo: detallesExtras.videoRecuerdo,
+        mesaDulces: detallesExtras.mesaDulces,
+        juegosInteractivos: detallesExtras.juegosInteractivos,
+        sesionFotosPadres: detallesExtras.sesionFotosPadres,
+        recuerdosPersonalizados: detallesExtras.recuerdosPersonalizados,
         locacionExtra: detallesExtras.locacionExtra,
         marcoFotos: detallesExtras.marcoFotos,
+        sesionExteriores: detallesExtras.sesionExteriores,
+        impresionLienzo: detallesExtras.impresionLienzo,
+        vestuarioTematico: detallesExtras.vestuarioTematico,
+        videoFamiliar: detallesExtras.videoFamiliar,
+        videoretrato: detallesExtras.videoretrato,
+        albumedefotos: detallesExtras.albumedefotos,
+        invitacionesFisicas: detallesExtras.invitacionesFisicas,
+        sesionIglesia: detallesExtras.sesionIglesia,
+        libroFirmas: detallesExtras.libroFirmas,
+        decoracionTematica: detallesExtras.decoracionTematica,
         fecha: detallesExtras.fecha,
         hora: detallesExtras.hora
       }" 

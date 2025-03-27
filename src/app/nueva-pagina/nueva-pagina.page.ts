@@ -20,7 +20,7 @@ export class NuevaPaginaPage implements OnInit {
   formulario: any = {};
   precioTotal: number = 0;
   tipoServicio: string = '';
-  fechaInvalida: boolean = false; // Para controlar si la fecha es inválida
+  fechaInvalida: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -51,6 +51,10 @@ export class NuevaPaginaPage implements OnInit {
           camarografoExtra: false,
           drone: false,
           albumPremium: false,
+          sesionPreBoda: false,
+          iluminacionProfesional: false,
+          albumDigital: false,
+          coberturaRedes: false,
           fecha: '',
           hora: ''
         };
@@ -60,6 +64,10 @@ export class NuevaPaginaPage implements OnInit {
           horasExtras: 0,
           maquillaje: false,
           videoCoreografia: false,
+          coreografiaProfesional: false,
+          cabinaFotos360: false,
+          pastelTematico: false,
+          invitacionesDigitales: false,
           fecha: '',
           hora: ''
         };
@@ -69,6 +77,10 @@ export class NuevaPaginaPage implements OnInit {
           horasExtras: 0,
           decoracionExtra: false,
           videoRecuerdo: false,
+          mesaDulces: false,
+          juegosInteractivos: false,
+          sesionFotosPadres: false,
+          recuerdosPersonalizados: false,
           fecha: '',
           hora: ''
         };
@@ -78,23 +90,28 @@ export class NuevaPaginaPage implements OnInit {
           horasExtras: 0,
           locacionExtra: false,
           marcoFotos: false,
+          sesionExteriores: false,
+          impresionLienzo: false,
+          vestuarioTematico: false,
+          videoFamiliar: false,
           fecha: '',
           hora: ''
         };
-        
         break;
-
-
-        case 'Paquete Bautizo':
-          this.formulario = {
-            horasExtras: 0,
-            locacionExtra: false,
-            marcoFotos: false,
-            fecha: '',
-            hora: ''
-          };
-          
-          break;
+      case 'Paquete Bautizo':
+        this.formulario = {
+          horasExtras: 0,
+          videoretrato: false,
+          marcoFotos: false,
+          albumedefotos: false,
+          invitacionesFisicas: false,
+          sesionIglesia: false,
+          libroFirmas: false,
+          decoracionTematica: false,
+          fecha: '',
+          hora: ''
+        };
+        break;
       default:
         this.formulario = {
           horasExtras: 0,
@@ -116,27 +133,45 @@ export class NuevaPaginaPage implements OnInit {
         if (this.formulario.camarografoExtra) costoExtra += 1500;
         if (this.formulario.drone) costoExtra += 1200;
         if (this.formulario.albumPremium) costoExtra += 900;
+        if (this.formulario.sesionPreBoda) costoExtra += 1000;
+        if (this.formulario.iluminacionProfesional) costoExtra += 800;
+        if (this.formulario.albumDigital) costoExtra += 600;
+        if (this.formulario.coberturaRedes) costoExtra += 500;
         break;
       case 'Paquete de XV Años':
         if (this.formulario.maquillaje) costoExtra += 1000;
         if (this.formulario.videoCoreografia) costoExtra += 2500;
+        if (this.formulario.coreografiaProfesional) costoExtra += 1200;
+        if (this.formulario.cabinaFotos360) costoExtra += 1500;
+        if (this.formulario.pastelTematico) costoExtra += 800;
+        if (this.formulario.invitacionesDigitales) costoExtra += 400;
         break;
       case 'Paquete BabyShower':
         if (this.formulario.decoracionExtra) costoExtra += 400;
         if (this.formulario.videoRecuerdo) costoExtra += 700;
+        if (this.formulario.mesaDulces) costoExtra += 600;
+        if (this.formulario.juegosInteractivos) costoExtra += 300;
+        if (this.formulario.sesionFotosPadres) costoExtra += 500;
+        if (this.formulario.recuerdosPersonalizados) costoExtra += 400;
         break;
       case 'Paquete Familiar':
         if (this.formulario.locacionExtra) costoExtra += 300;
         if (this.formulario.marcoFotos) costoExtra += 200;
+        if (this.formulario.sesionExteriores) costoExtra += 500;
+        if (this.formulario.impresionLienzo) costoExtra += 400;
+        if (this.formulario.vestuarioTematico) costoExtra += 300;
+        if (this.formulario.videoFamiliar) costoExtra += 600;
         break;
-
-        case 'Paquete Bautizo':
+      case 'Paquete Bautizo':
         if (this.formulario.videoretrato) costoExtra += 1500;
         if (this.formulario.marcoFotos) costoExtra += 800;
         if (this.formulario.albumedefotos) costoExtra += 1500;
+        if (this.formulario.invitacionesFisicas) costoExtra += 500;
+        if (this.formulario.sesionIglesia) costoExtra += 700;
+        if (this.formulario.libroFirmas) costoExtra += 300;
+        if (this.formulario.decoracionTematica) costoExtra += 600;
         break;
     }
-
 
     this.precioTotal = this.servicio.precio + costoExtra;
   }
@@ -145,17 +180,17 @@ export class NuevaPaginaPage implements OnInit {
     if (this.formulario.fecha) {
       const fechaSeleccionada = new Date(this.formulario.fecha);
       const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0); // Normalizar a medianoche para comparación justa
+      hoy.setHours(0, 0, 0, 0);
       this.fechaInvalida = fechaSeleccionada < hoy;
     } else {
-      this.fechaInvalida = false; // Si no hay fecha, no mostramos error aún
+      this.fechaInvalida = false;
     }
   }
 
   enviarFormulario() {
     this.validarFecha();
     if (this.fechaInvalida || !this.formulario.fecha || !this.formulario.hora) {
-      return; // No enviar si la fecha es inválida o falta fecha/hora
+      return;
     }
 
     this.router.navigate(['/resumen-servicio'], {
@@ -171,5 +206,18 @@ export class NuevaPaginaPage implements OnInit {
       },
       queryParamsHandling: 'merge'
     });
+  }
+
+  mostrarMensajeSiDesactivado() {
+    if (this.fechaInvalida || !this.formulario.fecha || !this.formulario.hora) {
+      let mensaje = 'Por favor selecciona la fecha del evento';
+      if (!this.formulario.hora) {
+        mensaje = 'Por favor selecciona la hora del evento';
+      }
+      if (this.fechaInvalida) {
+        mensaje = 'La fecha no puede ser anterior a hoy';
+      }
+      alert(mensaje);
+    }
   }
 }

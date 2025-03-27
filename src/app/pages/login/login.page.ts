@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   isSubmitting: boolean = false;
+  showPassword: boolean = false; // Variable para controlar la visibilidad de la contraseña
 
   constructor(
     private authService: AuthService,
@@ -32,7 +33,7 @@ export class LoginPage implements OnInit {
       contrasena: [
         '',
         [
-          Validators.required, // Solo requerido, sin otras validaciones
+          Validators.required,
         ],
       ],
     });
@@ -78,6 +79,10 @@ export class LoginPage implements OnInit {
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword; // Alternar el estado de visibilidad
   }
 
   get correoControl(): FormControl {
