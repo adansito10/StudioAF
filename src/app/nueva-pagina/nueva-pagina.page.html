@@ -164,6 +164,36 @@
                 </div>
               </div>
 
+
+
+                      <!-- Campos específicos para Paquete Bautizo -->
+                      <div *ngIf="tipoServicio === 'Paquete de sesiones'">
+                        <div class="mb-3">
+                          <label class="form-label">Edición Avanzada de Fotos ($500):</label>
+                          <input type="checkbox" [(ngModel)]="formulario.edicionAvanzada" name="edicionAvanzada" class="form-check-input" (change)="actualizarPrecio()">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Locación Adicional ($400):</label>
+                          <input type="checkbox" [(ngModel)]="formulario.locacionAdicional" name="locacionAdicional"class="form-check-input" (change)="actualizarPrecio()">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Impresión de 10 Fotos ($300):</label>
+                          <input type="checkbox" [(ngModel)]="formulario.impresionFotos" name="impresionFotos" class="form-check-input" (change)="actualizarPrecio()">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Video Corto de la Sesión ($600):</label>
+                          <input type="checkbox" [(ngModel)]="formulario.videoCorto" name="videoCorto" class="form-check-input" (change)="actualizarPrecio()">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Cambio de Vestuario ($200):</label>
+                          <input type="checkbox" [(ngModel)]="formulario.cambioVestuario" name="cambioVestuario" class="form-check-input" (change)="actualizarPrecio()">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Sesión Adicional en Estudio ($500):</label>
+                          <input type="checkbox" [(ngModel)]="formulario.sesionEstudio" name="sesionEstudio" class="form-check-input" (change)="actualizarPrecio()">
+                        </div>
+                      </div>
+
               <div>
                 <h5>Reserva tu sesión ahora</h5>
               </div>

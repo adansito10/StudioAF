@@ -23,7 +23,7 @@ export class Tab1Page implements OnInit {
         {
             title: 'LOS MEJORES EVENTOS',
             description: '',
-            image: 'assets/images/boda20.jpg',
+            image: 'assets/images/baby15.jpg',
         },
         {
             title: 'FOTOGRAFIA Y VIDEO PROFESIONAL',

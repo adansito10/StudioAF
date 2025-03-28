@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/nueva-pagina">
+      <ion-button routerLink="/detalle-servicio">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Detalle servicio</ion-title>
+    <ion-title>Resumen del Servicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -68,62 +68,22 @@
         <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.libroFirmas">Libro de firmas ($300)</li>
         <li *ngIf="servicio.nombre === 'Paquete Bautizo' && detallesExtras.decoracionTematica">Decoración temática ($600)</li>
 
+        <!-- Paquete de Sesiones -->
+        <li *ngIf="servicio.nombre === 'Paquete de sesiones' && detallesExtras.edicionAvanzada">Edición avanzada de fotos ($500)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de sesiones' && detallesExtras.locacionAdicional">Locación adicional ($400)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de sesiones' && detallesExtras.impresionFotos">Impresión de 10 fotos en formato físico ($300)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de sesiones' && detallesExtras.videoCorto">Video corto de la sesión ($600)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de sesiones' && detallesExtras.cambioVestuario">Cambio de vestuario durante la sesión ($200)</li>
+        <li *ngIf="servicio.nombre === 'Paquete de sesiones' && detallesExtras.sesionEstudio">Sesión adicional en estudio ($500)</li>
+
         <!-- Fecha y Hora -->
         <li><strong>Fecha:</strong> {{ detallesExtras.fecha }}</li>
         <li><strong>Hora:</strong> {{ detallesExtras.hora }}</li>
       </ul>
-    </div>
 
-    <div class="price-container">
-      <h4 class="section-title">Precio Total: ${{ precioTotal }}</h4>
+      <div class="price-container">
+        <h4 class="section-title">Precio Total: ${{ precioTotal }}</h4>
+      </div>
     </div>
-
-    <button 
-      routerLink="/formulario" 
-      [queryParams]="{
-        nombre: servicio.nombre,
-        descripcion: servicio.descripcion,
-        imagen: servicio.imagen,
-        contenido: servicio.contenido.join(','),
-        precio: servicio.precio,
-        precioTotal: precioTotal,
-        horasExtras: detallesExtras.horasExtras,
-        camarografoExtra: detallesExtras.camarografoExtra,
-        drone: detallesExtras.drone,
-        albumPremium: detallesExtras.albumPremium,
-        sesionPreBoda: detallesExtras.sesionPreBoda,
-        iluminacionProfesional: detallesExtras.iluminacionProfesional,
-        albumDigital: detallesExtras.albumDigital,
-        coberturaRedes: detallesExtras.coberturaRedes,
-        maquillaje: detallesExtras.maquillaje,
-        videoCoreografia: detallesExtras.videoCoreografia,
-        coreografiaProfesional: detallesExtras.coreografiaProfesional,
-        cabinaFotos360: detallesExtras.cabinaFotos360,
-        pastelTematico: detallesExtras.pastelTematico,
-        invitacionesDigitales: detallesExtras.invitacionesDigitales,
-        decoracionExtra: detallesExtras.decoracionExtra,
-        videoRecuerdo: detallesExtras.videoRecuerdo,
-        mesaDulces: detallesExtras.mesaDulces,
-        juegosInteractivos: detallesExtras.juegosInteractivos,
-        sesionFotosPadres: detallesExtras.sesionFotosPadres,
-        recuerdosPersonalizados: detallesExtras.recuerdosPersonalizados,
-        locacionExtra: detallesExtras.locacionExtra,
-        marcoFotos: detallesExtras.marcoFotos,
-        sesionExteriores: detallesExtras.sesionExteriores,
-        impresionLienzo: detallesExtras.impresionLienzo,
-        vestuarioTematico: detallesExtras.vestuarioTematico,
-        videoFamiliar: detallesExtras.videoFamiliar,
-        videoretrato: detallesExtras.videoretrato,
-        albumedefotos: detallesExtras.albumedefotos,
-        invitacionesFisicas: detallesExtras.invitacionesFisicas,
-        sesionIglesia: detallesExtras.sesionIglesia,
-        libroFirmas: detallesExtras.libroFirmas,
-        decoracionTematica: detallesExtras.decoracionTematica,
-        fecha: detallesExtras.fecha,
-        hora: detallesExtras.hora
-      }" 
-      class="btn-contratar">
-      Finalizar Contratación
-    </button>
   </div>
 </ion-content>

@@ -83,6 +83,14 @@ export class ResumenServicioPage implements OnInit {
           this.detallesExtras.libroFirmas = params['libroFirmas'] === 'true';
           this.detallesExtras.decoracionTematica = params['decoracionTematica'] === 'true';
           break;
+        case 'Paquete de sesiones':
+          this.detallesExtras.edicionAvanzada = params['edicionAvanzada'] === 'true';
+          this.detallesExtras.locacionAdicional = params['locacionAdicional'] === 'true';
+          this.detallesExtras.impresionFotos = params['impresionFotos'] === 'true';
+          this.detallesExtras.videoCorto = params['videoCorto'] === 'true';
+          this.detallesExtras.cambioVestuario = params['cambioVestuario'] === 'true';
+          this.detallesExtras.sesionEstudio = params['sesionEstudio'] === 'true';
+          break;
       }
 
       this.precioTotal = +params['precioTotal'] || this.servicio.precio;

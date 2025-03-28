@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetalleServicioPage implements OnInit {
   servicio: any = {
     nombre: '',
-    descripcion: '',    
+    descripcion: '',
     imagen: '',
     precio: 0,
     contenido: [],
@@ -28,7 +28,14 @@ export class DetalleServicioPage implements OnInit {
     setGrabacion: false,
     videoEvento: false,
     fecha: '',
-    hora: ''
+    hora: '',
+    // Nuevos extras para Paquete de Sesiones
+    edicionAvanzada: false,
+    locacionAdicional: false,
+    impresionFotos: false,
+    videoCorto: false,
+    cambioVestuario: false,
+    sesionEstudio: false
   };
 
   constructor(private route: ActivatedRoute) {}
@@ -40,7 +47,7 @@ export class DetalleServicioPage implements OnInit {
       this.servicio.descripcion = params['descripcion'];
       this.servicio.imagen = params['imagen'];
       this.servicio.video = params['video'] || '';
-      
+
       // Cargar los detalles extras del formulario
       this.detallesExtras = {
         horasExtras: params['horasExtras'] || 0,
@@ -49,6 +56,13 @@ export class DetalleServicioPage implements OnInit {
         videoEvento: params['videoEvento'] === 'true',
         fecha: params['fecha'] || 'No especificada',
         hora: params['hora'] || 'No especificada',
+        // Nuevos extras para Paquete de Sesiones
+        edicionAvanzada: params['edicionAvanzada'] === 'true',
+        locacionAdicional: params['locacionAdicional'] === 'true',
+        impresionFotos: params['impresionFotos'] === 'true',
+        videoCorto: params['videoCorto'] === 'true',
+        cambioVestuario: params['cambioVestuario'] === 'true',
+        sesionEstudio: params['sesionEstudio'] === 'true'
       };
 
       // Asignar los precios y contenido según el tipo de servicio
@@ -58,8 +72,8 @@ export class DetalleServicioPage implements OnInit {
           this.servicio.contenido = [
             'Cobertura completa del evento',
             'Entrega digital en alta calidad',
-            'Fotografia natural y artistica',
-            'Edicion profesional',
+            'Fotografía natural y artística',
+            'Edición profesional'
           ];
           this.servicio.video = 'https://fb.watch/xOdxl6Debf/';
           break;
@@ -67,8 +81,8 @@ export class DetalleServicioPage implements OnInit {
           this.servicio.precio = 15000;
           this.servicio.contenido = [
             'Cobertura completa del evento',
-            'Sesion formal con la quinceañera',
-            'Fotografia de familia y amigos',
+            'Sesión formal con la quinceañera',
+            'Fotografía de familia y amigos'
           ];
           this.servicio.video = 'assets/videos/paquete-xv.mp4';
           break;
@@ -77,40 +91,38 @@ export class DetalleServicioPage implements OnInit {
           this.servicio.contenido = [
             'Cobertura completa',
             'Entrega digital en alta calidad',
-            'Fotografias familiares y amigos',
-            'Edicion profesional',
-
-            
+            'Fotografías familiares y amigos',
+            'Edición profesional'
           ];
           this.servicio.video = 'assets/videos/paquete-infantil.mp4';
           break;
-
-
-          case 'Paquete Familiar':
-            this.servicio.precio = 6000;
-            this.servicio.contenido = [
-              'Sesion fotografica en locacion elegida',
-              'entrega en digital en alta calidad',
-              'Fotografias en grupal o inviduales',
-            ];
-
-            
-            this.servicio.video = 'assets/videos/paquete-infantil.mp4';
-            break;
-
-
-
-            case 'Paquete Bautizo':
-              this.servicio.precio = 6000;
-              this.servicio.contenido = [
-                'Cobertura completa del evento',
-                'Fotografias familiares y padrinos',
-                '100 fotografias de alta calidad',
-              ];
-  
-              
-              this.servicio.video = 'assets/videos/paquete-infantil.mp4';
-              break;
+        case 'Paquete Familiar':
+          this.servicio.precio = 6000;
+          this.servicio.contenido = [
+            'Sesión fotográfica en locación elegida',
+            'Entrega en digital en alta calidad',
+            'Fotografías en grupal o individuales'
+          ];
+          this.servicio.video = 'assets/videos/paquete-infantil.mp4';
+          break;
+        case 'Paquete Bautizo':
+          this.servicio.precio = 6000;
+          this.servicio.contenido = [
+            'Cobertura completa del evento',
+            'Fotografías familiares y padrinos',
+            '100 fotografías de alta calidad'
+          ];
+          this.servicio.video = 'assets/videos/paquete-infantil.mp4';
+          break;
+        case 'Paquete de sesiones':
+          this.servicio.precio = 6000;
+          this.servicio.contenido = [
+            'Sesión fotográfica en locación a elegir (estudio o exteriores)',
+            'Entrega de 50 fotos en alta resolución',
+            'Duración de la sesión: 2 horas'
+          ];
+          this.servicio.video = 'assets/videos/paquete-infantil.mp4';
+          break;
         default:
           this.servicio.precio = 0;
           this.servicio.contenido = ['Información no disponible'];
@@ -126,6 +138,7 @@ export class DetalleServicioPage implements OnInit {
   actualizarPrecio() {
     let extraCosto = 0;
 
+    // Costos comunes
     if (this.detallesExtras.horasExtras > 0) {
       extraCosto += this.detallesExtras.horasExtras * 300; // 300 por hora extra
     }
@@ -137,6 +150,28 @@ export class DetalleServicioPage implements OnInit {
     }
     if (this.detallesExtras.videoEvento) {
       extraCosto += 1000; // Costo del video del evento
+    }
+
+    // Costos específicos del Paquete de Sesiones
+    if (this.servicio.nombre === 'Paquete de Sesiones') {
+      if (this.detallesExtras.edicionAvanzada) {
+        extraCosto += 500; // Edición avanzada de fotos
+      }
+      if (this.detallesExtras.locacionAdicional) {
+        extraCosto += 400; // Locación adicional
+      }
+      if (this.detallesExtras.impresionFotos) {
+        extraCosto += 300; // Impresión de 10 fotos en formato físico
+      }
+      if (this.detallesExtras.videoCorto) {
+        extraCosto += 600; // Video corto de la sesión
+      }
+      if (this.detallesExtras.cambioVestuario) {
+        extraCosto += 200; // Cambio de vestuario durante la sesión
+      }
+      if (this.detallesExtras.sesionEstudio) {
+        extraCosto += 500; // Sesión adicional en estudio
+      }
     }
 
     // Actualizar precio total incluyendo las opciones adicionales

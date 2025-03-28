@@ -171,7 +171,16 @@ export class NuevaPaginaPage implements OnInit {
         if (this.formulario.libroFirmas) costoExtra += 300;
         if (this.formulario.decoracionTematica) costoExtra += 600;
         break;
-    }
+
+        case 'Paquete de sesiones':
+          if (this.formulario.edicionAvanzada) costoExtra += 500;
+          if (this.formulario.locacionAdicional) costoExtra += 400;
+          if (this.formulario.impresionFotos) costoExtra += 300;
+          if (this.formulario.videoCorto) costoExtra += 600;
+          if (this.formulario.cambioVestuario) costoExtra += 200;
+          if (this.formulario.sesionEstudio) costoExtra += 500;
+          break;
+      }
 
     this.precioTotal = this.servicio.precio + costoExtra;
   }
