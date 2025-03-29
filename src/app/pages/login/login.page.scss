@@ -1,5 +1,5 @@
 .login-container {
-  --background: #222831; /* Fondo oscuro */
+  --background: #121212; /* Fondo oscuro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,15 +47,15 @@
 }
 
 .input-field {
-  --background: #31363F;
+  --background: #2a2c2f;
   --color: #eeeeee;
   border-radius: 5px;
   margin-bottom: 15px;
 }
 
 .login-button {
-  --background: #f72585;
-  --color: white;
+  --background: #ffffff;
+  --color: rgb(0, 0, 0);
   border-radius: 5px;
   margin-top: 15px;
 }
@@ -66,7 +66,7 @@
 }
 
 .signup-link {
-  color: #f72585;
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
 }

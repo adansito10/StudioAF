@@ -1,0 +1,27 @@
+.no-pedidos {
+    text-align: center;
+    margin-top: 50px;
+  
+    p {
+      font-size: 18px;
+      color: #666;
+    }
+  }
+  
+  ion-item {
+    --border-radius: 8px;
+    margin-bottom: 10px;
+  
+    ion-label {
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1a1a1a;
+      }
+  
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  }

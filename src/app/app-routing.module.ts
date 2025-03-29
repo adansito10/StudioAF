@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+
+  {
+    path: '',
+    redirectTo: 'splash-screen', // Redirigir a la pantalla de carga por defecto
+    pathMatch: 'full'
+  },
   {
     path: '',
     redirectTo: '/login', 
@@ -62,7 +68,16 @@ const routes: Routes = [
   {
     path: 'contacto',
     loadChildren: () => import('./contacto/contacto.module').then( m => m.ContactoPageModule)
-  }
+  },
+  {
+    path: 'splash-screen',
+    loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
+  },
+
 ];
 
 @NgModule({

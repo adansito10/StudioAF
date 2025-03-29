@@ -1,0 +1,52 @@
+ion-content {
+    --background: #121212; // Fondo oscuro, consistente con tu diseño
+  }
+  
+  .splash-container {
+    display: flex;
+    flex-direction: column; // Alinear elementos en columna (logo arriba, título abajo)
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .logo {
+    width: 200px; // Ajusta el tamaño según tu logo
+    animation: fadeInScale 2s ease-in-out forwards; // Animación para el logo
+  }
+  
+  .splash-title {
+    color: #ffffff; // Texto blanco para que contraste con el fondo oscuro
+    font-size: 28px; // Tamaño del título
+    font-weight: bold; // Negritas para que destaque
+    font-style: italic; // Hacer el texto cursivo
+    margin-top: 20px; // Espacio entre el logo y el título
+    animation: fadeIn 1.5s ease-in-out forwards; // Animación para el título
+    opacity: 0; // Comienza invisible para la animación
+  }
+  
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px); // El título sube ligeramente al aparecer
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

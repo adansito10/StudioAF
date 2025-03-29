@@ -77,7 +77,7 @@
         <ion-input
           formControlName="nombreTarjeta"
           placeholder="Ingrese el nombre del titular"
-          maxlength="50" 
+          maxlength="35" 
           class="custom-input">
         </ion-input>
         <ion-text color="danger" *ngIf="paymentForm.get('nombreTarjeta')?.touched && paymentForm.get('nombreTarjeta')?.invalid">

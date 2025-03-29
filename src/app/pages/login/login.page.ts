@@ -74,7 +74,7 @@ export class LoginPage implements OnInit {
     } catch (error) {
       console.error('Error completo en login:', error);
       await loading.dismiss();
-      const errorMessage = (error as any).error?.error || 'Error desconocido';
+      const errorMessage = (error as any).error?.error || 'Correo o ontraseña invalidos, intente de nuevo';
       alert('Error al iniciar sesión: ' + errorMessage);
     } finally {
       this.isSubmitting = false;

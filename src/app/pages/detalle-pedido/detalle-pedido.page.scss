@@ -1,0 +1,28 @@
+.pedido-details {
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #333;
+  
+      strong {
+        color: #1a1a1a;
+      }
+    }
+  }
+  
+  .no-pedido {
+    text-align: center;
+    margin-top: 50px;
+  
+    p {
+      font-size: 18px;
+      color: #666;
+    }
+  }

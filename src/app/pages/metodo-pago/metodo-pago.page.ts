@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import { toDataURL } from 'qrcode';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { Filesystem, Directory } from '@capacitor/filesystem';
-import { Platform, ToastController } from '@ionic/angular'; // Agregar ToastController para notificaciones
+import { Platform, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 declare var paypal: any;
@@ -18,8 +18,9 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
   selectedMethod: string | null = null;
   selectedMethodName: string = '';
   paymentForm: FormGroup;
+  showCookieWarning: boolean = false;
 
-  private clientId = 'ATIofl8OUzubLTHl2IN2maj2n2CQz23k2Htk6VKejP6wf9Sa8Myg3bskj_ejS0slc5cWNvAgX_L4X_dt';
+  private clientId = 'ATIofl8OUzubLTHl2IN2maj2n2CQz23k2Htk6VKejP6wf9Sa8Myg3bskj_ejS0slc5cWNvAgX_L4X_dt'; // Reemplaza con tu Client ID válido
   private paypalScriptLoaded = false;
   public isWeb: boolean;
 
@@ -34,13 +35,14 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
 
   isLoading: boolean = false;
   isSuccess: boolean = false;
+  ultimaTransaccion: any = null;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private platform: Platform,
     private fb: FormBuilder,
-    private toastController: ToastController // Para mostrar notificaciones
+    private toastController: ToastController
   ) {
     this.isWeb = !this.platform.is('capacitor');
 
@@ -84,7 +86,9 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.isWeb) {
-      this.loadPayPalScript();
+      this.loadPayPalScript().catch((error) => {
+        console.error('Error al cargar PayPal SDK en ngAfterViewInit:', error);
+      });
     }
   }
 
@@ -93,11 +97,23 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
     this.selectedMethodName = this.getPaymentMethodName(method);
 
     if (method === 'tarjetaDebito' && this.isWeb) {
-      if (this.paypalScriptLoaded && paypal) {
-        this.renderPayPalButton();
-      } else {
-        console.log('Esperando a que el SDK de PayPal se cargue...');
-      }
+      this.loadPayPalScript()
+        .then(() => {
+          if (this.paypalScriptLoaded && paypal) {
+            this.renderPayPalButton();
+            if (!this.areThirdPartyCookiesEnabled()) {
+              this.showCookieWarning = true;
+            }
+          } else {
+            console.error('PayPal SDK no está disponible después de cargar el script.');
+            this.showToast('No se pudo cargar PayPal. Intenta de nuevo.', 'danger');
+          }
+        })
+        .catch((error) => {
+          console.error('Error al cargar PayPal SDK al seleccionar método:', error);
+        });
+    } else {
+      this.showCookieWarning = false;
     }
   }
 
@@ -129,9 +145,33 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
         }
         console.log('Pago con tarjeta de crédito:', this.paymentForm.value);
         await this.generatePaymentReceipt();
+
+        this.ultimaTransaccion = {
+          id: this.ventaId,
+          fecha: new Date().toLocaleString(),
+          metodoPago: this.selectedMethodName,
+          paquete: this.paqueteSeleccionado.nombre,
+          monto: this.paqueteSeleccionado.precio,
+          moneda: 'MXN',
+          estado: 'Completado',
+        };
+        console.log('ultimaTransaccion asignada (tarjetaCredito):', this.ultimaTransaccion);
+
         this.isSuccess = true;
       } else if (this.selectedMethod === 'oxxo') {
         await this.generatePdfWithQRCode();
+
+        this.ultimaTransaccion = {
+          id: this.ventaId,
+          fecha: new Date().toLocaleString(),
+          metodoPago: this.selectedMethodName,
+          paquete: this.paqueteSeleccionado.nombre,
+          monto: this.paqueteSeleccionado.precio,
+          moneda: 'MXN',
+          estado: 'Pendiente',
+        };
+        console.log('ultimaTransaccion asignada (oxxo):', this.ultimaTransaccion);
+
         this.isSuccess = true;
       }
     } catch (error) {
@@ -139,6 +179,43 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
       await this.showToast('Ocurrió un error al procesar el pago. Por favor, intenta de nuevo.', 'danger');
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async compartirCompra() {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: '¡Acabo de contratar un servicio con Studio AF!',
+          text: `Contraté el ${this.paqueteSeleccionado.nombre} con Studio AF. ¡Recomiendo sus servicios!`,
+          url: 'https://studioaf.com'
+        });
+        await this.showToast('¡Gracias por compartir tu compra!', 'success');
+      } catch (error) {
+        console.error('Error al compartir:', error);
+        await this.showToast('No se pudo compartir. Intenta de nuevo.', 'danger');
+      }
+    } else {
+      await this.showToast('La función de compartir no está disponible en tu dispositivo.', 'warning');
+    }
+  }
+
+  navigateToHome() {
+    this.isSuccess = false;
+    const navigationExtras: NavigationExtras = {
+      state: {
+        showThankYouMessage: true
+      }
+    };
+    this.router.navigateByUrl('/tabs/tab1', navigationExtras);
+  }
+
+  navigateToHistorial() {
+    if (this.ultimaTransaccion) {
+      console.log('Navegando a historial-pedidos con queryParams:', this.ultimaTransaccion);
+      this.router.navigate(['/historial'], { queryParams: this.ultimaTransaccion });
+    } else {
+      this.showToast('No hay datos de transacción para mostrar.', 'warning');
     }
   }
 
@@ -152,33 +229,58 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
     await toast.present();
   }
 
-  private loadPayPalScript() {
-    if (this.paypalScriptLoaded) return;
+  private loadPayPalScript(): Promise<void> {
+    if (this.paypalScriptLoaded) return Promise.resolve();
 
-    const scriptUrl = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(this.clientId)}&currency=USD`;
+    const baseUrl = 'https://www.paypal.com/sdk/js';
+    const params = new URLSearchParams({
+      'client-id': this.clientId,
+      'currency': 'USD'
+    });
+    const scriptUrl = `${baseUrl}?${params.toString()}`;
 
     console.log('Intentando cargar PayPal SDK con URL:', scriptUrl);
 
-    const script = document.createElement('script');
-    script.src = scriptUrl;
-    script.async = true;
-    script.onload = () => {
-      this.paypalScriptLoaded = true;
-      console.log('SDK de PayPal cargado correctamente');
-      if (this.selectedMethod === 'tarjetaDebito') {
-        this.renderPayPalButton();
-      }
-    };
-    script.onerror = (error) => {
-      console.error('Error al cargar el SDK de PayPal:', error);
-      console.error('URL intentada:', script.src);
-      this.showToast('No se pudo cargar PayPal. Verifica tu conexión o el Client ID.', 'danger');
-    };
-    document.body.appendChild(script);
+    return fetch(scriptUrl, { method: 'HEAD' })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error al probar la URL de PayPal: ${response.status} ${response.statusText}`);
+        }
+        console.log('URL de PayPal es accesible:', response.status);
+        return new Promise<void>((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = scriptUrl;
+          script.async = true;
+          script.onload = () => {
+            this.paypalScriptLoaded = true;
+            console.log('SDK de PayPal cargado correctamente');
+            resolve();
+          };
+          script.onerror = (error) => {
+            console.error('Error al cargar el SDK de PayPal:', error);
+            console.error('URL intentada:', script.src);
+            this.showToast('No se pudo cargar PayPal. Verifica tu conexión o el Client ID.', 'danger');
+            reject(error);
+          };
+          document.body.appendChild(script);
+        });
+      })
+      .catch(error => {
+        console.error('Error al probar la URL de PayPal:', error);
+        this.showToast('No se pudo cargar PayPal. Verifica tu conexión o el Client ID.', 'danger');
+        throw error;
+      });
   }
 
   private renderPayPalButton() {
-    if (this.paypalScriptLoaded && paypal && document.getElementById('paypal-button-container')) {
+    const paypalContainer = document.getElementById('paypal-button-container');
+    if (!paypalContainer) {
+      console.error('Contenedor de PayPal no encontrado. Asegúrate de que <div id="paypal-button-container"></div> esté en el template.');
+      this.showToast('Error al mostrar el botón de PayPal. Contenedor no encontrado.', 'danger');
+      return;
+    }
+
+    if (this.paypalScriptLoaded && typeof paypal !== 'undefined' && paypal.Buttons) {
       try {
         paypal.Buttons({
           createOrder: (data: any, actions: any) => {
@@ -195,15 +297,32 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
             });
           },
           onApprove: (data: any, actions: any) => {
-            return actions.order.capture().then((details: any) => {
+            return actions.order.capture().then(async (details: any) => {
               console.log('Pago completado:', details);
               this.showToast(`¡Pago exitoso con PayPal! ID de transacción: ${details.id}`, 'success');
               this.isLoading = true;
-              setTimeout(async () => {
+
+              try {
                 await this.generatePaymentReceipt();
-                this.isLoading = false;
+
+                this.ultimaTransaccion = {
+                  id: details.id,
+                  fecha: new Date().toLocaleString(),
+                  metodoPago: this.selectedMethodName,
+                  paquete: this.paqueteSeleccionado.nombre,
+                  monto: this.paqueteSeleccionado.precio,
+                  moneda: 'USD',
+                  estado: 'Completado',
+                };
+                console.log('ultimaTransaccion asignada (PayPal):', this.ultimaTransaccion);
+
                 this.isSuccess = true;
-              }, 2000);
+              } catch (error) {
+                console.error('Error después de capturar el pago:', error);
+                this.showToast('Error al generar el comprobante.', 'danger');
+              } finally {
+                this.isLoading = false;
+              }
             });
           },
           onError: (err: any) => {
@@ -217,7 +336,13 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
       }
     } else {
       console.error('No se puede renderizar el botón de PayPal. Script cargado:', this.paypalScriptLoaded);
+      console.error('PayPal SDK disponible:', typeof paypal !== 'undefined' ? 'Sí' : 'No');
+      this.showToast('No se pudo cargar el botón de PayPal. Intenta de nuevo.', 'danger');
     }
+  }
+
+  private areThirdPartyCookiesEnabled(): boolean {
+    return navigator.cookieEnabled;
   }
 
   private async loadImageAsBase64(url: string): Promise<string> {
@@ -407,7 +532,6 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
   async saveFile(blob: Blob, fileName: string) {
     if (this.platform.is('capacitor') || this.platform.is('cordova')) {
       try {
-        // Verificar y solicitar permisos para escribir en el sistema de archivos
         const permissions = await Filesystem.checkPermissions();
         console.log('Permisos actuales:', permissions);
 
@@ -430,7 +554,6 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
           recursive: true
         });
 
-        // Obtener la URI del archivo guardado
         const uriResult = await Filesystem.getUri({
           path: fileName,
           directory: Directory.Documents
@@ -459,10 +582,5 @@ export class MetodoPagoPage implements OnInit, AfterViewInit {
         throw error;
       }
     }
-  }
-
-  navigateToHome() {
-    this.isSuccess = false;
-    this.router.navigateByUrl('/tabs/tab1');
   }
 }

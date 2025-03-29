@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'nueva-pagina',
     loadChildren: () => import('./nueva-pagina/nueva-pagina.module').then( m => m.NuevaPaginaPageModule)
+  },
+  {
+    path: 'historial-pedidos',
+    loadChildren: () => import('./historial-pedidos/historial-pedidos.module').then( m => m.HistorialPedidosPageModule)
+  },
+  {
+    path: 'detalle-pedido',
+    loadChildren: () => import('./detalle-pedido/detalle-pedido.module').then( m => m.DetallePedidoPageModule)
   }
 
 ];
