@@ -85,5 +85,58 @@
         <h4 class="section-title">Precio Total: ${{ precioTotal }}</h4>
       </div>
     </div>
+
+    <button 
+    class="btn-contratar"
+    [routerLink]="['/formulario']"
+    [queryParams]="{
+      nombre: servicio.nombre,
+      descripcion: servicio.descripcion,
+      imagen: servicio.imagen,
+      contenido: servicio.contenido.join(','),
+      precio: precioTotal,
+      horasExtras: detallesExtras.horasExtras,
+      camarografoExtra: detallesExtras.camarografoExtra,
+      drone: detallesExtras.drone,
+      albumPremium: detallesExtras.albumPremium,
+      sesionPreBoda: detallesExtras.sesionPreBoda,
+      iluminacionProfesional: detallesExtras.iluminacionProfesional,
+      albumDigital: detallesExtras.albumDigital,
+      coberturaRedes: detallesExtras.coberturaRedes,
+      maquillaje: detallesExtras.maquillaje,
+      videoCoreografia: detallesExtras.videoCoreografia,
+      coreografiaProfesional: detallesExtras.coreografiaProfesional,
+      cabinaFotos360: detallesExtras.cabinaFotos360,
+      pastelTematico: detallesExtras.pastelTematico,
+      invitacionesDigitales: detallesExtras.invitacionesDigitales,
+      decoracionExtra: detallesExtras.decoracionExtra,
+      videoRecuerdo: detallesExtras.videoRecuerdo,
+      mesaDulces: detallesExtras.mesaDulces,
+      juegosInteractivos: detallesExtras.juegosInteractivos,
+      sesionFotosPadres: detallesExtras.sesionFotosPadres,
+      recuerdosPersonalizados: detallesExtras.recuerdosPersonalizados,
+      locacionExtra: detallesExtras.locacionExtra,
+      marcoFotos: detallesExtras.marcoFotos,
+      sesionExteriores: detallesExtras.sesionExteriores,
+      impresionLienzo: detallesExtras.impresionLienzo,
+      vestuarioTematico: detallesExtras.vestuarioTematico,
+      videoFamiliar: detallesExtras.videoFamiliar,
+      videoretrato: detallesExtras.videoretrato,
+      albumedefotos: detallesExtras.albumedefotos,
+      invitacionesFisicas: detallesExtras.invitacionesFisicas,
+      sesionIglesia: detallesExtras.sesionIglesia,
+      libroFirmas: detallesExtras.libroFirmas,
+      decoracionTematica: detallesExtras.decoracionTematica,
+      edicionAvanzada: detallesExtras.edicionAvanzada,
+      locacionAdicional: detallesExtras.locacionAdicional,
+      impresionFotos: detallesExtras.impresionFotos,
+      videoCorto: detallesExtras.videoCorto,
+      cambioVestuario: detallesExtras.cambioVestuario,
+      sesionEstudio: detallesExtras.sesionEstudio,
+      fecha: detallesExtras.fecha,
+      hora: detallesExtras.hora
+    }">
+    Finalizar Contratación
+  </button>
   </div>
 </ion-content>
